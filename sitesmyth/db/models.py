@@ -43,6 +43,9 @@ class Lead(Base):
     instagram_last_post_date: Mapped[str | None] = mapped_column(String(30), nullable=True)
     primary_social: Mapped[str | None] = mapped_column(String(20), nullable=True)  # facebook, instagram, both
     has_website: Mapped[bool] = mapped_column(Boolean, default=False)
+    content_score: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    site_brief: Mapped[str | None] = mapped_column(Text, nullable=True)
+    gbp_photo_urls: Mapped[str | None] = mapped_column(Text, nullable=True)  # JSON list of Google Business Profile photo URLs
 
     status: Mapped[str] = mapped_column(String(30), default="discovered", nullable=False, index=True)
     site_generated_at: Mapped[str | None] = mapped_column(String(30), nullable=True)

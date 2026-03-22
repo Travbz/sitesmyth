@@ -24,9 +24,20 @@ wheels/
 .installed.cfg
 *.egg
 
-# Data and output
-data/
+# Generated sites (staging before R2 upload)
 output/
+
+# Node (Stitch SDK installed at runtime)
+node_modules/
+package.json
+package-lock.json
+
+# Stitch temp files (generated during builds)
+_stitch_gen.mjs
+.stitch_tmp_*
+stitch_*.mjs
+stitch_*.html
+stitch_*.png
 
 # Terraform
 terraform/.terraform/

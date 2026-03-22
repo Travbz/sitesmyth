@@ -10,7 +10,7 @@ from sitesmyth.config import Config
 from sitesmyth.db import get_session
 from sitesmyth.db.models import Lead
 from sitesmyth.db.queries import get_sendable_leads
-from sitesmyth.outreach.email_sender import send_email
+from sitesmyth.outreach.email_sender import send_email, send_no_demo_email
 from sitesmyth.outreach.instagram_dm import generate_dm_queue
 
 log = logging.getLogger(__name__)

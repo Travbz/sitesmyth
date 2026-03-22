@@ -32,7 +32,7 @@ class Config:
 
     # Google Gemini (content generation, vision)
     gemini_api_key: str = ""
-    gemini_model: str = "gemini-2.0-flash"
+    gemini_model: str = "gemini-2.5-flash"
 
     # Cloudflare (R2 + Worker hosting)
     cloudflare_account_id: str = ""
@@ -55,7 +55,6 @@ class Config:
     physical_address: str = ""
 
     # Paths
-    data_dir: Path = field(default_factory=lambda: Path("data"))
     output_dir: Path = field(default_factory=lambda: Path("output"))
 
     # Pipeline defaults
@@ -64,7 +63,15 @@ class Config:
 
     @classmethod
     def load(cls, env_file: str | Path | None = None) -> Config:
-        load_dotenv(env_file or ".env")
+        if env_file:
+            load_dotenv(env_file)
+        else:
+            for candidate in [Path(".env"), Path(__file__).resolve().parent.parent.parent / ".env"]:
+                if candidate.exists():
+                    load_dotenv(candidate)
+                    break
+            else:
+                load_dotenv(".env")
         db_url = os.getenv("DATABASE_URL") or "sqlite:///leads.db"
         account_id = os.getenv("CLOUDFLARE_ACCOUNT_ID", "")
         r2_endpoint = os.getenv("CLOUDFLARE_R2_ENDPOINT") or (
@@ -75,7 +82,7 @@ class Config:
             google_maps_key=os.getenv("GOOGLE_MAPS_KEY", ""),
             apify_api_token=os.getenv("APIFY_API_TOKEN", ""),
             gemini_api_key=os.getenv("GEMINI_API_KEY", ""),
-            gemini_model=os.getenv("GEMINI_MODEL", "gemini-2.0-flash"),
+            gemini_model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
             cloudflare_account_id=account_id,
             cloudflare_api_token=os.getenv("CLOUDFLARE_API_TOKEN", ""),
             cloudflare_r2_access_key=os.getenv("CLOUDFLARE_R2_ACCESS_KEY", ""),
@@ -90,7 +97,6 @@ class Config:
             contact_email=os.getenv("CONTACT_EMAIL", "hello@sitesmyth.com"),
             contact_phone=os.getenv("CONTACT_PHONE", ""),
             physical_address=os.getenv("PHYSICAL_ADDRESS", ""),
-            data_dir=Path(os.getenv("SITESMYTH_DATA_DIR", "data")),
             output_dir=Path(os.getenv("SITESMYTH_OUTPUT_DIR", "output")),
             max_emails_per_hour=_int_env("SITESMYTH_MAX_EMAILS_PER_HOUR", 50),
             max_dm_per_day=_int_env("SITESMYTH_MAX_DM_PER_DAY", 15),

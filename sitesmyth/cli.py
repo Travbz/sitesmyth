@@ -28,11 +28,12 @@ def cli() -> None:
 @click.option("--categories", default="restaurants,plumbers", help="Comma-separated categories")
 @click.option("--limit", default=5, type=int, help="Max leads per stage")
 @click.option("--dry-run-outreach", is_flag=True, help="Skip sending real emails in outreach step")
-def run(zip_code: str | None, city: str | None, state: str, categories: str, limit: int, dry_run_outreach: bool) -> None:
+@click.option("--skip-activity-check", is_flag=True, help="Skip activity check (for demo with manual leads)")
+def run(zip_code: str | None, city: str | None, state: str, categories: str, limit: int, dry_run_outreach: bool, skip_activity_check: bool) -> None:
     """Run full pipeline: discover → scrape → generate → upload → outreach."""
     from sitesmyth.pipeline import run_pipeline
     cat_list = [c.strip() for c in categories.split(",") if c.strip()]
-    run_pipeline(zip_code=zip_code, city=city, state=state, categories=cat_list, limit=limit, outreach_dry_run=dry_run_outreach)
+    run_pipeline(zip_code=zip_code, city=city, state=state, categories=cat_list, limit=limit, outreach_dry_run=dry_run_outreach, skip_activity_check=skip_activity_check)
 
 
 @cli.command()
@@ -86,7 +87,6 @@ def scrape(lead_id: int | None, all_pending: bool) -> None:
     """Scrape Facebook/Instagram content for leads."""
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     cfg = Config.load()
-    cfg.data_dir.mkdir(parents=True, exist_ok=True)
 
     session = get_session(cfg.database_url)
     if lead_id:
@@ -109,22 +109,20 @@ def scrape(lead_id: int | None, all_pending: bool) -> None:
     from sitesmyth.scraper.facebook_scraper import scrape_facebook
     from sitesmyth.scraper.instagram_scraper import scrape_instagram
     from sitesmyth.scraper.content_merger import merge_content
-    from sitesmyth.scraper.image_downloader import optimize_images
 
     for lead in leads:
         console.rule(f"[bold blue]{lead.business_name}[/bold blue]")
         total = 0
         if lead.facebook_url and lead.facebook_active:
-            n = scrape_facebook(lead.id, cfg.data_dir)
+            n = scrape_facebook(lead.id)
             total += n
             console.print(f"  Facebook: {n} items")
         if lead.instagram_handle and lead.instagram_active:
-            n = scrape_instagram(lead.id, cfg.data_dir)
+            n = scrape_instagram(lead.id)
             total += n
             console.print(f"  Instagram: {n} items")
         if lead.facebook_url and lead.instagram_handle:
-            merge_content(lead.id, cfg.data_dir)
-        optimize_images(lead.id, cfg.data_dir)
+            merge_content(lead.id)
         console.print(f"  [green]Total: {total}[/green]")
     console.rule("[bold green]Done[/bold green]")
 
@@ -136,7 +134,6 @@ def generate(lead_id: int | None, all_scraped: bool) -> None:
     """Generate static site from scraped content (Gemini Flash)."""
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     cfg = Config.load()
-    cfg.data_dir.mkdir(parents=True, exist_ok=True)
     cfg.output_dir.mkdir(parents=True, exist_ok=True)
 
     session = get_session(cfg.database_url)
@@ -154,14 +151,16 @@ def generate(lead_id: int | None, all_scraped: bool) -> None:
         console.print("[yellow]No leads to generate[/yellow]")
         return
 
-    from sitesmyth.generator.content_generator import generate_content
-    from sitesmyth.generator.site_builder import build_site
+    from sitesmyth.generator.planner import plan_site
+    from sitesmyth.generator.stitch_builder import build_stitch_site
 
     for lead in leads:
         console.rule(f"[bold blue]{lead.business_name}[/bold blue]")
         try:
-            content = generate_content(lead.id, cfg.data_dir, cfg.output_dir)
-            site_dir = build_site(lead.id, content, cfg.data_dir, cfg.output_dir, cfg)
+            console.print("  Planning (vibe check)...")
+            plan_site(lead.id)
+            console.print("  Building (Google Stitch)...")
+            site_dir = build_stitch_site(lead.id, cfg.output_dir)
             from datetime import datetime
             session = get_session(cfg.database_url)
             l = session.query(Lead).filter(Lead.id == lead.id).first()
@@ -299,6 +298,105 @@ def status() -> None:
 
     console.print(table)
     session.close()
+
+
+@cli.command()
+@click.option("--name", required=True, help="Business name")
+@click.option("--category", default=None, help="Business category (e.g. Restaurant, Barber shop)")
+@click.option("--address", default=None, help="Street address")
+@click.option("--city", default=None, help="City")
+@click.option("--state", default=None, help="State abbreviation")
+@click.option("--zip", "zip_code", default=None, help="Zip code")
+@click.option("--phone", default=None, help="Phone number")
+@click.option("--email", default=None, help="Business email")
+@click.option("--facebook", default=None, help="Facebook page URL")
+@click.option("--instagram", default=None, help="Instagram handle (without @)")
+@click.option("--maps-url", default=None, help="Google Maps URL")
+@click.option("--brief", default=None, help="Site brief / description of the business")
+def add_lead(
+    name: str, category: str | None, address: str | None, city: str | None,
+    state: str | None, zip_code: str | None, phone: str | None, email: str | None,
+    facebook: str | None, instagram: str | None, maps_url: str | None, brief: str | None,
+) -> None:
+    """Manually create a lead for building a demo site."""
+    import re
+    cfg = Config.load()
+    session = get_session(cfg.database_url)
+
+    slug = re.sub(r"[^a-z0-9]+", "-", name.lower().strip()).strip("-")[:80]
+    existing = session.query(Lead).filter(Lead.slug == slug).first()
+    if existing:
+        console.print(f"[yellow]Lead already exists: ID={existing.id} ({existing.business_name})[/yellow]")
+        session.close()
+        return
+
+    lead = Lead(
+        business_name=name.strip(),
+        slug=slug,
+        category=category,
+        address=address,
+        city=city,
+        state=state,
+        zip_code=zip_code,
+        phone=phone,
+        email=email,
+        google_maps_url=maps_url,
+        facebook_url=facebook,
+        instagram_handle=instagram,
+        has_website=False,
+        status="scraped",
+        site_brief=brief,
+    )
+    session.add(lead)
+    session.commit()
+    console.print(f"[green]Created lead ID={lead.id}: {lead.business_name} (slug: {lead.slug})[/green]")
+    session.close()
+
+
+@cli.command()
+@click.option("--lead-id", type=int, required=True, help="Lead ID to attach photos to")
+@click.argument("photo_urls", nargs=-1)
+def add_photos(lead_id: int, photo_urls: tuple[str, ...]) -> None:
+    """Attach Google Business Profile photo URLs to a lead for Stitch theming."""
+    import json
+    cfg = Config.load()
+    session = get_session(cfg.database_url)
+    lead = session.query(Lead).filter(Lead.id == lead_id).first()
+    if not lead:
+        console.print(f"[red]Lead {lead_id} not found[/red]")
+        session.close()
+        raise SystemExit(1)
+
+    existing = json.loads(lead.gbp_photo_urls) if lead.gbp_photo_urls else []
+    existing.extend(photo_urls)
+    lead.gbp_photo_urls = json.dumps(existing)
+    session.commit()
+    console.print(f"[green]{lead.business_name}: {len(existing)} photos attached[/green]")
+    session.close()
+
+
+@cli.command()
+@click.confirmation_option(prompt="Delete ALL demo sites from R2?")
+def nuke_sites() -> None:
+    """Delete all demo sites from R2 (keeps _marketing/)."""
+    logging.basicConfig(level=logging.INFO, format="%(message)s")
+    cfg = Config.load()
+    from sitesmyth.hosting.uploader import _get_r2_client
+
+    client = _get_r2_client(cfg)
+    bucket = cfg.cloudflare_r2_bucket
+    paginator = client.get_paginator("list_objects_v2")
+    deleted = 0
+
+    for page in paginator.paginate(Bucket=bucket, Prefix="sites/"):
+        objects = page.get("Contents", [])
+        if not objects:
+            continue
+        batch = [{"Key": obj["Key"]} for obj in objects]
+        client.delete_objects(Bucket=bucket, Delete={"Objects": batch})
+        deleted += len(batch)
+
+    console.print(f"[green]Deleted {deleted} objects from R2 sites/[/green]")
 
 
 def main() -> None:

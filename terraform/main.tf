@@ -16,11 +16,11 @@ data "cloudflare_zone" "sitesmyth" {
   name = var.domain
 }
 
-# R2 bucket for demo sites + landing page
+# R2 bucket for demo sites + landing page (location matches existing bucket)
 resource "cloudflare_r2_bucket" "sites" {
   account_id = var.cloudflare_account_id
   name       = "sitesmyth-demos"
-  location   = "ENAM"
+  location   = "WNAM"
 }
 
 # Worker script
@@ -36,22 +36,32 @@ resource "cloudflare_workers_script" "sitesmyth" {
 }
 
 # Route: *.sitesmyth.com → Worker
-resource "cloudflare_worker_route" "wildcard" {
+resource "cloudflare_workers_route" "wildcard" {
   zone_id     = data.cloudflare_zone.sitesmyth.id
   pattern     = "*.${var.domain}/*"
   script_name = cloudflare_workers_script.sitesmyth.name
 }
 
 # Route: sitesmyth.com (root)
-resource "cloudflare_worker_route" "root" {
+resource "cloudflare_workers_route" "root" {
   zone_id     = data.cloudflare_zone.sitesmyth.id
   pattern     = "${var.domain}/*"
   script_name = cloudflare_workers_script.sitesmyth.name
 }
 
 # Route: www.sitesmyth.com
-resource "cloudflare_worker_route" "www" {
+resource "cloudflare_workers_route" "www" {
   zone_id     = data.cloudflare_zone.sitesmyth.id
   pattern     = "www.${var.domain}/*"
   script_name = cloudflare_workers_script.sitesmyth.name
+}
+
+# Wildcard DNS — all subdomains route through Cloudflare proxy → Worker
+resource "cloudflare_record" "wildcard" {
+  zone_id = data.cloudflare_zone.sitesmyth.id
+  name    = "*"
+  type    = "CNAME"
+  content = var.domain
+  ttl     = 1
+  proxied = true
 }
