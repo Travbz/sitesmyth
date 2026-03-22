@@ -24,6 +24,7 @@ def run_pipeline(
     categories: list[str] | None = None,
     limit: int = 10,
     outreach_dry_run: bool = False,
+    skip_activity_check: bool = False,
 ) -> None:
     """Run full pipeline: discover → scrape → generate → upload → outreach (email only)."""
     logging.basicConfig(level=logging.INFO, format="%(message)s")
@@ -50,7 +51,8 @@ def run_pipeline(
         from sitesmyth.discovery.social_finder import find_social_profiles
         from sitesmyth.discovery.activity_checker import run_activity_check
         find_social_profiles(limit=added + 20)
-        run_activity_check(limit=added + 20)
+        if not skip_activity_check:
+            run_activity_check(limit=added + 20)
 
         console.rule("[bold blue]3. Scrape[/bold blue]")
         from sitesmyth.scraper.facebook_scraper import scrape_facebook
@@ -67,10 +69,16 @@ def run_pipeline(
         session.close()
 
         for lead in to_scrape:
-            if lead.facebook_url and lead.facebook_active:
-                scrape_facebook(lead.id, cfg.data_dir)
-            if lead.instagram_handle and lead.instagram_active:
-                scrape_instagram(lead.id, cfg.data_dir)
+            try:
+                if lead.facebook_url and lead.facebook_active:
+                    scrape_facebook(lead.id, cfg.data_dir)
+            except Exception as e:
+                log.warning("Facebook scrape failed for %s: %s", lead.business_name, e)
+            try:
+                if lead.instagram_handle and lead.instagram_active:
+                    scrape_instagram(lead.id, cfg.data_dir)
+            except Exception as e:
+                log.warning("Instagram scrape failed for %s: %s", lead.business_name, e)
             if lead.facebook_url and lead.instagram_handle:
                 merge_content(lead.id, cfg.data_dir)
             optimize_images(lead.id, cfg.data_dir)

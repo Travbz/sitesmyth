@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 from pathlib import Path
 
 import google.generativeai as genai
@@ -69,10 +70,19 @@ Output ONLY valid JSON, no markdown or extra text."""
     response = model.generate_content(prompt)
     text = response.text.strip()
     if text.startswith("```"):
-        text = text.split("```")[1]
+        parts = text.split("```")
+        text = parts[1] if len(parts) > 1 else text
         if text.startswith("json"):
             text = text[4:]
-    data = json.loads(text)
+    text = text.strip()
+    # Fix common Gemini JSON issues: trailing commas
+    text = re.sub(r",\s*}", "}", text)
+    text = re.sub(r",\s*]", "]", text)
+    try:
+        data = json.loads(text)
+    except json.JSONDecodeError as e:
+        log.warning("Gemini JSON parse failed (first 500 chars): %s ... error: %s", text[:500], e)
+        raise
 
     hero_image = "images/hero.jpg"
     gallery_images = []

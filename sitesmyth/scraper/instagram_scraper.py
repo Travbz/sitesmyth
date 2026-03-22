@@ -45,18 +45,19 @@ def scrape_instagram(lead_id: int, data_dir: Path) -> int:
     profile_url = f"https://www.instagram.com/{lead.instagram_handle}/"
     client = ApifyClient(cfg.apify_api_token)
     actor = client.actor(IG_ACTOR)
-    run = actor.call(
-        run_input={
-            "directUrls": [profile_url],
-            "resultsLimit": 20,
-        },
-        timeout=120,
-    )
+    run = actor.call(run_input={
+        "username": [lead.instagram_handle],
+        "resultsLimit": 20,
+    })
     if not run:
         session.close()
         return 0
 
-    dataset = client.dataset(run.default_dataset_id)
+    dataset_id = run.get("defaultDatasetId") if isinstance(run, dict) else getattr(run, "default_dataset_id", None)
+    if not dataset_id:
+        session.close()
+        return 0
+    dataset = client.dataset(dataset_id)
     items = list(dataset.iterate_items())
 
     lead_dir = data_dir / str(lead_id) / "images"

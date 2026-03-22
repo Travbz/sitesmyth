@@ -39,7 +39,7 @@ def _check_facebook_activity(client: ApifyClient, page_url: str) -> tuple[bool, 
         return False, None, None
     try:
         actor = client.actor(FB_POSTS_ACTOR)
-        run = actor.call(run_input={"startUrls": [{"url": page_url}], "maxPosts": 10}, timeout=60)
+        run = actor.call(run_input={"startUrls": [{"url": page_url}], "maxPosts": 10})
         if not run:
             return False, None, None
         dataset = client.dataset(run.default_dataset_id)
@@ -67,7 +67,7 @@ def _check_instagram_activity(client: ApifyClient, username: str) -> tuple[bool,
         return False, None, None
     try:
         actor = client.actor(IG_POSTS_ACTOR)
-        run = actor.call(run_input={"directUrls": [f"https://www.instagram.com/{username}/"], "resultsLimit": 10}, timeout=60)
+        run = actor.call(run_input={"directUrls": [f"https://www.instagram.com/{username}/"], "resultsLimit": 10})
         if not run:
             return False, None, None
         dataset = client.dataset(run.default_dataset_id)

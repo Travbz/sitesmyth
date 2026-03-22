@@ -44,18 +44,19 @@ def scrape_facebook(lead_id: int, data_dir: Path) -> int:
 
     client = ApifyClient(cfg.apify_api_token)
     actor = client.actor(FB_POSTS_ACTOR)
-    run = actor.call(
-        run_input={
-            "startUrls": [{"url": lead.facebook_url}],
-            "maxPosts": 15,
-        },
-        timeout=120,
-    )
+    run = actor.call(run_input={
+        "startUrls": [{"url": lead.facebook_url}],
+        "maxPosts": 15,
+    })
     if not run:
         session.close()
         return 0
 
-    dataset = client.dataset(run.default_dataset_id)
+    dataset_id = run.get("defaultDatasetId") if isinstance(run, dict) else getattr(run, "default_dataset_id", None)
+    if not dataset_id:
+        session.close()
+        return 0
+    dataset = client.dataset(dataset_id)
     items = list(dataset.iterate_items())
 
     lead_dir = data_dir / str(lead_id) / "images"

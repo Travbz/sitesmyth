@@ -28,11 +28,12 @@ def cli() -> None:
 @click.option("--categories", default="restaurants,plumbers", help="Comma-separated categories")
 @click.option("--limit", default=5, type=int, help="Max leads per stage")
 @click.option("--dry-run-outreach", is_flag=True, help="Skip sending real emails in outreach step")
-def run(zip_code: str | None, city: str | None, state: str, categories: str, limit: int, dry_run_outreach: bool) -> None:
+@click.option("--skip-activity-check", is_flag=True, help="Skip activity check (for demo with manual leads)")
+def run(zip_code: str | None, city: str | None, state: str, categories: str, limit: int, dry_run_outreach: bool, skip_activity_check: bool) -> None:
     """Run full pipeline: discover → scrape → generate → upload → outreach."""
     from sitesmyth.pipeline import run_pipeline
     cat_list = [c.strip() for c in categories.split(",") if c.strip()]
-    run_pipeline(zip_code=zip_code, city=city, state=state, categories=cat_list, limit=limit, outreach_dry_run=dry_run_outreach)
+    run_pipeline(zip_code=zip_code, city=city, state=state, categories=cat_list, limit=limit, outreach_dry_run=dry_run_outreach, skip_activity_check=skip_activity_check)
 
 
 @cli.command()
