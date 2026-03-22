@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sitesmyth"
+version = "0.1.0"
+description = "Automated pipeline: find local businesses without websites, generate demo sites from social content, host at *.sitesmyth.com, send cold outreach"
+requires-python = ">=3.11"
+dependencies = [
+    "apify-client>=1.6.0",
+    "google-generativeai>=0.8.0",
+    "boto3>=1.35.0",
+    "resend>=2.0.0",
+    "Pillow>=10.0.0",
+    "click>=8.1.0",
+    "rich>=13.0.0",
+    "python-dotenv>=1.0.0",
+    "requests>=2.31.0",
+    "beautifulsoup4>=4.12.0",
+    "thefuzz>=0.22.0",
+    "sqlalchemy>=2.0.0",
+    "alembic>=1.13.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov",
+]
+
+[project.scripts]
+sitesmyth = "sitesmyth.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]

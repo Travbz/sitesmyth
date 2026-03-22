@@ -1,0 +1,310 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-slate-950/80 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <a href="/" class="flex items-center gap-2">
+        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600">
+          <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14" />
+          </svg>
+        </div>
+        <span class="text-lg font-bold tracking-tight">Site<span class="text-brand-400">Smyth</span></span>
+      </a>
+      <a href="#cta" class="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-500">
+        Get your site
+      </a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero -->
+    <section class="relative overflow-hidden pt-32 pb-20 md:pt-44 md:pb-32">
+      <div class="pointer-events-none absolute inset-0">
+        <div class="absolute top-0 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-brand-600/20 blur-[120px]"></div>
+        <div class="absolute top-40 right-0 h-[400px] w-[400px] rounded-full bg-cyan-500/10 blur-[100px]"></div>
+      </div>
+
+      <div class="relative mx-auto max-w-6xl px-6">
+        <div class="mx-auto max-w-3xl text-center">
+          <div class="mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5">
+            <span class="h-2 w-2 animate-pulse rounded-full bg-emerald-400"></span>
+            <span class="text-sm font-medium text-emerald-300">Websites for local businesses without one</span>
+          </div>
+
+          <h1 class="mb-6 text-4xl font-extrabold leading-tight tracking-tight md:text-6xl md:leading-[1.1]">
+            Your business has a website.
+            <br />
+            <span class="bg-gradient-to-r from-brand-400 to-cyan-400 bg-clip-text text-transparent">
+              You just haven't seen it yet.
+            </span>
+          </h1>
+
+          <p class="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-slate-400 md:text-xl">
+            We find local businesses on Facebook and Instagram, build them a demo site from their photos and posts,
+            <span class="text-slate-300">and get them live on their own domain in 48 hours.</span>
+          </p>
+
+          <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <a
+              href="#cta"
+              class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25 transition-all hover:bg-brand-500 hover:shadow-brand-500/30 sm:w-auto"
+            >
+              Get your site — $1,000
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            <a
+              href="#how"
+              class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/10 px-8 py-3.5 text-base font-medium text-slate-300 transition-all hover:border-white/20 hover:bg-white/5 sm:w-auto"
+            >
+              How it works
+            </a>
+          </div>
+        </div>
+
+        <div class="mt-20 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 border-t border-white/5 pt-10">
+          <div class="flex items-center gap-2 text-sm text-slate-500">
+            <svg class="h-4 w-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            Built from your social content
+          </div>
+          <div class="flex items-center gap-2 text-sm text-slate-500">
+            <svg class="h-4 w-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            Live in 48 hours
+          </div>
+          <div class="flex items-center gap-2 text-sm text-slate-500">
+            <svg class="h-4 w-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            Your domain, mobile-first, SEO-ready
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how" class="relative border-t border-white/5 py-24 md:py-32 px-6">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="mx-auto mb-16 max-w-2xl text-center">
+          <span class="mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-brand-400">How it works</span>
+          <h2 class="mb-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
+            Five steps. About 1–2 hours of your time.
+          </h2>
+          <p class="text-lg text-slate-400">
+            Can be done same day or scheduled for when you're ready.
+          </p>
+        </div>
+
+        <div class="mx-auto max-w-2xl">
+          <div class="space-y-6">
+            <div class="flex items-start gap-4 rounded-xl border border-white/5 bg-white/[0.02] p-6">
+              <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-brand-600/20 text-sm font-bold text-brand-400">1</span>
+              <div>
+                <h3 class="font-semibold text-white">You provide feedback</h3>
+                <p class="mt-1 text-sm text-slate-400">Tell us what you'd like changed on your demo site — copy, photos, layout.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 rounded-xl border border-white/5 bg-white/[0.02] p-6">
+              <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-brand-600/20 text-sm font-bold text-brand-400">2</span>
+              <div>
+                <h3 class="font-semibold text-white">We make edits</h3>
+                <p class="mt-1 text-sm text-slate-400">We refine the site based on your feedback until you're happy.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 rounded-xl border border-white/5 bg-white/[0.02] p-6">
+              <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-brand-600/20 text-sm font-bold text-brand-400">3</span>
+              <div>
+                <h3 class="font-semibold text-white">We get you a domain name</h3>
+                <p class="mt-1 text-sm text-slate-400">Together — we'll use GoDaddy or your preferred registrar to register your domain.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 rounded-xl border border-white/5 bg-white/[0.02] p-6">
+              <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-brand-600/20 text-sm font-bold text-brand-400">4</span>
+              <div>
+                <h3 class="font-semibold text-white">You create a Cloudflare account and add me</h3>
+                <p class="mt-1 text-sm text-slate-400">Free account. I'll walk you through adding me as a user — takes a few minutes. No GitHub or technical setup on your end.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 rounded-xl border border-white/5 bg-white/[0.02] p-6">
+              <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-brand-600/20 text-sm font-bold text-brand-400">5</span>
+              <div>
+                <h3 class="font-semibold text-white">I deploy your site. You get a zip.</h3>
+                <p class="mt-1 text-sm text-slate-400">Your site goes live on your domain. You get a zip file — it's yours to keep. I retain a copy so I can make updates if you ever want them.</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="mt-8 text-center text-sm text-slate-500">
+            Can be done same day or scheduled. Takes 1–2 hours of your time.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- What we do -->
+    <section id="what" class="relative border-t border-white/5 py-24 md:py-32 px-6">
+      <div class="mx-auto max-w-6xl">
+        <div class="mx-auto mb-16 max-w-2xl text-center">
+          <span class="mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-brand-400">What we build</span>
+          <h2 class="mb-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
+            Built from what's already out there.
+          </h2>
+          <p class="text-lg text-slate-400">
+            We pull from your Facebook and Instagram — photos, reviews, hours, services — and turn it into a real website. No need to send us assets. You give feedback, we edit, done.
+          </p>
+        </div>
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="rounded-2xl border border-white/5 bg-white/[0.02] p-8 transition hover:border-brand-500/20 hover:bg-white/[0.04]">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-400/10 text-brand-400">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14" />
+              </svg>
+            </div>
+            <h3 class="mt-6 text-xl font-semibold text-white">Your photos, your brand</h3>
+            <p class="mt-3 text-slate-400">
+              We use your social media — no stock photos, no generic templates. Your menu, your team, your projects.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-white/5 bg-white/[0.02] p-8 transition hover:border-brand-500/20 hover:bg-white/[0.04]">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-400/10 text-brand-400">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="mt-6 text-xl font-semibold text-white">Live in 48 hours</h3>
+            <p class="mt-3 text-slate-400">
+              We build it, deploy to your domain, hand you a zip. Your Cloudflare, your site. Done.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-white/5 bg-white/[0.02] p-8 transition hover:border-brand-500/20 hover:bg-white/[0.04] sm:col-span-2 lg:col-span-1">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-400/10 text-brand-400">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 class="mt-6 text-xl font-semibold text-white">Mobile-first, SEO-ready</h3>
+            <p class="mt-3 text-slate-400">
+              Fast loading, Google-friendly, works on every device. Built for local search and real customers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="relative border-t border-white/5 py-24 md:py-32 px-6">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="mx-auto mb-16 max-w-2xl text-center">
+          <span class="mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-brand-400">Pricing</span>
+          <h2 class="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
+            Simple pricing. No surprises.
+          </h2>
+          <p class="text-lg text-slate-400">
+            $1,000 flat. No hosting fee — you use your own Cloudflare.
+          </p>
+        </div>
+
+        <div class="mx-auto max-w-2xl space-y-6">
+          <p class="text-center text-slate-400">
+            <strong class="text-white">You own your site.</strong> You're the custodian. I set it up and hand it off.
+          </p>
+
+          <div class="relative rounded-2xl border border-brand-500/30 bg-brand-500/[0.04] p-8 md:p-10">
+            <div class="absolute -top-3 left-8 rounded-full bg-brand-600 px-3 py-0.5 text-xs font-semibold text-white">
+              Setup
+            </div>
+
+            <div class="mb-6">
+              <h3 class="text-2xl font-bold">Website for your business</h3>
+              <p class="mt-2 text-sm leading-relaxed text-slate-400">
+                Built from your social content. Your domain, handoff included.
+              </p>
+            </div>
+
+            <div class="mb-8 border-b border-white/5 pb-8">
+              <div class="flex items-baseline gap-1">
+                <span class="text-4xl font-extrabold">$1,000</span>
+                <span class="text-lg text-slate-400"> flat — one-time</span>
+              </div>
+              <p class="mt-2 text-sm text-slate-500">
+                No hosting fee. You use your own Cloudflare account. You get a zip at handoff and after every update — it's yours. I keep a copy so I can handle updates if you request them.
+              </p>
+              <p class="mt-3 text-sm font-semibold text-slate-300">Future updates?</p>
+              <p class="mt-1 text-sm text-slate-500">
+                $100 flat per update when you need one. Set it and forget it otherwise.
+              </p>
+            </div>
+
+            <a
+              href="#cta"
+              class="block w-full rounded-xl bg-brand-600 px-6 py-3.5 text-center text-base font-semibold text-white shadow-lg shadow-brand-600/25 transition-all hover:bg-brand-500 hover:shadow-brand-500/30"
+            >
+              Get your site
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta" class="relative border-t border-white/5 py-24 md:py-32 px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-white md:text-4xl">
+          Ready for a real website?
+        </h2>
+        <p class="mt-4 text-slate-400">
+          Reply to our outreach email, or reach out directly.
+        </p>
+        <div class="mt-10 flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
+          <a
+            href="mailto:hello@undercurrentsmb.com"
+            class="inline-flex w-full items-center justify-center rounded-xl bg-brand-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25 transition-all hover:bg-brand-500 hover:shadow-brand-500/30 sm:w-auto"
+          >
+            hello@undercurrentsmb.com
+          </a>
+          <a
+            href="tel:+17206931337"
+            class="inline-flex w-full items-center justify-center rounded-xl border border-white/10 px-8 py-3.5 text-base font-medium text-slate-300 transition-all hover:border-white/20 hover:bg-white/5 sm:w-auto"
+          >
+            (720) 693-1337
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-12">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="flex flex-col items-center justify-between gap-6 md:flex-row">
+          <div class="flex flex-col items-center gap-1 md:items-start">
+            <div class="flex items-center gap-2">
+              <div class="flex h-7 w-7 items-center justify-center rounded-lg bg-brand-600">
+                <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14" />
+                </svg>
+              </div>
+              <span class="text-sm font-semibold">Site<span class="text-brand-400">Smyth</span></span>
+            </div>
+            <p class="text-xs italic text-slate-500">Websites for local businesses without one.</p>
+          </div>
+
+          <div class="flex flex-col items-center gap-1 md:items-end">
+            <p class="text-sm text-slate-500">
+              &copy; {new Date().getFullYear()} SiteSmyth.
+            </p>
+            <p class="text-xs text-slate-500">
+              Note: SiteSmyth is a product of UndercurrentSMB.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+</Layout>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{business_name}}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-white shadow">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold">{{business_name}}</h1>
+      <a href="tel:{{phone}}" class="text-blue-600 font-medium">Call</a>
+    </div>
+  </header>
+  <main>
+    <section class="relative h-64 md:h-80 bg-gray-200">
+      <img src="{{hero_image}}" alt="{{business_name}}" class="w-full h-full object-cover">
+      <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 to-transparent p-6">
+        <h2 class="text-2xl md:text-3xl font-bold text-white">{{tagline}}</h2>
+      </div>
+    </section>
+    <section class="max-w-5xl mx-auto px-4 py-12">
+      <h3 class="text-2xl font-bold mb-4">About Us</h3>
+      <p class="text-gray-600 leading-relaxed">{{about}}</p>
+    </section>
+    <section class="max-w-5xl mx-auto px-4 py-12 bg-white">
+      <h3 class="text-2xl font-bold mb-6">Services</h3>
+      <div class="grid md:grid-cols-2 gap-4">
+        {{services}}
+      </div>
+    </section>
+    <section class="max-w-5xl mx-auto px-4 py-12">
+      <h3 class="text-2xl font-bold mb-6">Gallery</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {{gallery_images}}
+      </div>
+    </section>
+    <section class="max-w-5xl mx-auto px-4 py-12 bg-gray-100">
+      <h3 class="text-2xl font-bold mb-4">Contact</h3>
+      <p class="text-gray-600">{{address}}</p>
+      <a href="tel:{{phone}}" class="block text-blue-600 font-medium mt-2">{{phone}}</a>
+      {{instagram_link}}
+      <div class="mt-4">{{google_maps_embed}}</div>
+    </section>
+  </main>
+  <footer class="bg-gray-800 text-gray-300 py-6 text-center text-sm">
+    <p>Powered by <a href="https://sitesmyth.com" class="text-amber-400 hover:underline">SiteSmyth</a> — Want this site? Call {{contact_phone}}</p>
+  </footer>
+</body>
+</html>

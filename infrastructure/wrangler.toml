@@ -1,0 +1,20 @@
+name = "sitesmyth-worker"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "sitesmyth-sites"
+
+# Routes: add after domain is on Cloudflare
+# [[routes]]
+# pattern = "*.sitesmyth.com/*"
+# zone_name = "sitesmyth.com"
+#
+# [[routes]]
+# pattern = "sitesmyth.com/*"
+# zone_name = "sitesmyth.com"
+#
+# [[routes]]
+# pattern = "www.sitesmyth.com/*"
+# zone_name = "sitesmyth.com"
