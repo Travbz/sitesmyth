@@ -13,25 +13,58 @@ We're selling $1,000 websites to local businesses that currently have no website
 
 ## Integration Plan
 
+### Applies to both pipelines
+
+This isn't SiteSmyth-only. **SiteForge already scores existing sites** with Lighthouse + SpyFu before building replacements. Adding geo-seo-claude to both pipelines creates a before/after comparison that neither tool has today.
+
+| Pipeline | Existing site scoring | Demo site scoring |
+|----------|----------------------|-------------------|
+| **SiteForge** (has-website leads) | Lighthouse + SpyFu + **GEO audit** | **GEO audit** on built demo |
+| **SiteSmyth** (no-website leads) | N/A (no existing site) | **GEO audit** on built demo |
+
+For SiteForge leads: "Your current site scores 32/100 for AI search. Our demo scores 87/100." That's a direct, quantifiable improvement that's hard to argue with.
+
+For SiteSmyth leads: "Your business is invisible to AI search. Your demo site scores 85/100." Different angle, same impact.
+
 ### When to run
 
-Run the audit **twice** per generated site:
+Run the audit up to **three times** depending on pipeline:
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│  Scrape → Build → AUDIT #1 → Fix → Upload → Outreach   │
-│                                                         │
-│  Audit #1 (post-build, pre-upload):                     │
-│    Run on local build output (localhost or file://)      │
-│    Score the site, flag issues, auto-fix what we can     │
-│    Re-build if needed                                    │
-│                                                         │
-│  Audit #2 (post-upload):                                │
-│    Run on live URL ({slug}.sitesmyth.com)                │
-│    Verify live scores, catch deployment issues           │
-│    Include scores in outreach email                      │
-└─────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│  SiteForge (existing sites):                                 │
+│    AUDIT #0 → Score prospect's EXISTING site (before)        │
+│    Scrape → Build → AUDIT #1 → Fix → Upload → Outreach      │
+│    Compare: existing GEO score vs demo GEO score             │
+│                                                              │
+│  SiteSmyth (no-website leads):                               │
+│    Scrape → Build → AUDIT #1 → Fix → Upload → Outreach      │
+│    No "before" score — prospect has no site                  │
+│                                                              │
+│  Both pipelines:                                             │
+│    Audit #1 (post-build, pre-upload):                        │
+│      Run on local build output (localhost or file://)        │
+│      Score the site, flag issues, auto-fix what we can       │
+│      Re-build if needed                                      │
+│                                                              │
+│    Audit #2 (post-upload):                                   │
+│      Run on live URL ({slug}.sitesmyth.com)                  │
+│      Verify live scores, catch deployment issues             │
+│      Include scores in outreach email                        │
+└──────────────────────────────────────────────────────────────┘
 ```
+
+### SiteForge integration (existing sites)
+
+SiteForge already runs Lighthouse + SpyFu in the scorer step. Adding GEO audit alongside:
+
+1. **Scorer step** (`scorer.py`): After Lighthouse/SpyFu, run geo-seo-claude on the prospect's existing URL. Store GEO score in the `scores` table alongside Lighthouse scores.
+2. **Planner step** (`planner.py`): Include GEO audit findings in the ghostwrite context — "their current site has no schema markup, blocks AI crawlers, content isn't citable."
+3. **Builder step** (`builder.py`): The site-brief.md already includes SEO checklist. Add GEO-specific requirements: citable content blocks, llms.txt, AI crawler access.
+4. **Post-build**: Run GEO audit on the demo. Store score.
+5. **Emailer step** (`emailer.py`): Include the comparison in the email context so Claude Code can reference real numbers.
+
+This gives SiteForge a massive outreach upgrade — the email goes from "your Lighthouse score is 28" to "your AI search visibility is 32/100, our demo scores 87/100, and AI search traffic converts 4.4x better than organic."
 
 ### What geo-seo-claude checks
 
@@ -68,13 +101,23 @@ Whichever builder wins (Gemini or Claude Code), add these to the build spec:
 
 ### Outreach integration
 
-Include GEO score in the cold email:
+**SiteForge (has existing site):**
 
-> We built a demo website for {{business_name}} — it scores **{{geo_score}}/100** for AI search readiness, meaning Google's AI Overviews, ChatGPT, and Perplexity can find and recommend your business.
+> Your current website scores **{{existing_geo_score}}/100** for AI search visibility. That means ChatGPT, Perplexity, and Google AI Overviews can barely find your business.
+>
+> We built a replacement that scores **{{demo_geo_score}}/100**. Same business, same content — just structured so AI search engines can actually cite you.
 >
 > See it live: {{demo_url}}
 
-This reframes the pitch from "we made you a website" to "we made you visible to AI search engines." Much stronger value prop as AI search grows.
+**SiteSmyth (no existing site):**
+
+> Right now, {{business_name}} is invisible to AI search — no website means ChatGPT, Perplexity, and Google AI Overviews have nothing to recommend.
+>
+> We built a demo site that scores **{{demo_geo_score}}/100** for AI search readiness. Your business shows up when people ask AI for recommendations in {{city}}.
+>
+> See it live: {{demo_url}}
+
+Both reframe the pitch from "we made you a website" to "we made you visible to AI search." The before/after comparison (SiteForge path) is especially powerful — it's a concrete number attached to a concrete problem.
 
 ### Minimum score threshold
 
