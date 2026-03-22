@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import logging
 import re
 import time
@@ -197,6 +198,11 @@ def run_maps_discovery(
             parts = str(instagram_url).rstrip("/").split("/")
             instagram_handle = parts[-1] if parts else None
 
+        # Capture GBP photo URLs for Stitch design theming
+        gbp_photos = item.get("imageUrls") or item.get("images") or []
+        if isinstance(gbp_photos, list):
+            gbp_photos = [u for u in gbp_photos if isinstance(u, str) and u.startswith("http")][:10]
+
         lead = Lead(
             business_name=title,
             slug=slug,
@@ -212,6 +218,7 @@ def run_maps_discovery(
             instagram_handle=instagram_handle,
             has_website=False,
             status="discovered",
+            gbp_photo_urls=json.dumps(gbp_photos) if gbp_photos else None,
         )
         session.add(lead)
         new_count += 1

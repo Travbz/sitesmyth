@@ -14,6 +14,28 @@ from sitesmyth.db.models import Lead
 
 log = logging.getLogger(__name__)
 
+_CONTENT_TYPES = {
+    ".html": "text/html",
+    ".css": "text/css",
+    ".js": "application/javascript",
+    ".json": "application/json",
+    ".xml": "application/xml",
+    ".txt": "text/plain",
+    ".svg": "image/svg+xml",
+    ".ico": "image/x-icon",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".png": "image/png",
+    ".webp": "image/webp",
+    ".gif": "image/gif",
+    ".woff": "font/woff",
+    ".woff2": "font/woff2",
+}
+
+
+def _get_content_type(suffix: str) -> str:
+    return _CONTENT_TYPES.get(suffix.lower(), "application/octet-stream")
+
 
 def _get_r2_client(cfg: Config):
     """Create boto3 S3 client for R2."""
@@ -41,9 +63,7 @@ def upload_site(slug: str, site_dir: Path, cfg: Config) -> int:
     for path in site_dir.rglob("*"):
         if path.is_file():
             key = f"{prefix}/{path.relative_to(site_dir)}".replace("\\", "/")
-            content_type = "text/html" if path.suffix == ".html" else "application/octet-stream"
-            if path.suffix in (".jpg", ".jpeg", ".png", ".webp", ".gif"):
-                content_type = f"image/{path.suffix[1:]}"
+            content_type = _get_content_type(path.suffix)
             client.upload_file(str(path), bucket, key, ExtraArgs={"ContentType": content_type})
             count += 1
             log.debug("Uploaded %s", key)
@@ -64,13 +84,7 @@ def upload_landing_page(landing_dist: Path, cfg: Config) -> int:
     for path in landing_dist.rglob("*"):
         if path.is_file():
             key = f"{prefix}/{path.relative_to(landing_dist)}".replace("\\", "/")
-            content_type = "text/html" if path.suffix == ".html" else "application/octet-stream"
-            if path.suffix in (".css",):
-                content_type = "text/css"
-            elif path.suffix in (".js",):
-                content_type = "application/javascript"
-            elif path.suffix in (".jpg", ".jpeg", ".png", ".webp", ".svg", ".ico"):
-                content_type = f"image/{path.suffix[1:]}"
+            content_type = _get_content_type(path.suffix)
             client.upload_file(str(path), bucket, key, ExtraArgs={"ContentType": content_type})
             count += 1
 

@@ -55,7 +55,6 @@ class Config:
     physical_address: str = ""
 
     # Paths
-    data_dir: Path = field(default_factory=lambda: Path("data"))
     output_dir: Path = field(default_factory=lambda: Path("output"))
 
     # Pipeline defaults
@@ -98,7 +97,6 @@ class Config:
             contact_email=os.getenv("CONTACT_EMAIL", "hello@sitesmyth.com"),
             contact_phone=os.getenv("CONTACT_PHONE", ""),
             physical_address=os.getenv("PHYSICAL_ADDRESS", ""),
-            data_dir=Path(os.getenv("SITESMYTH_DATA_DIR", "data")),
             output_dir=Path(os.getenv("SITESMYTH_OUTPUT_DIR", "output")),
             max_emails_per_hour=_int_env("SITESMYTH_MAX_EMAILS_PER_HOUR", 50),
             max_dm_per_day=_int_env("SITESMYTH_MAX_DM_PER_DAY", 15),
