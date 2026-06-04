@@ -19,19 +19,25 @@ data "cloudflare_zone" "sitesmyth" {
 # R2 bucket for demo sites + landing page (location matches existing bucket)
 resource "cloudflare_r2_bucket" "sites" {
   account_id = var.cloudflare_account_id
-  name       = "sitesmyth-demos"
+  name       = var.bucket_name
   location   = "WNAM"
 }
 
 # Worker script
 resource "cloudflare_workers_script" "sitesmyth" {
   account_id = var.cloudflare_account_id
-  name       = "sitesmyth-worker"
+  name       = var.worker_name
   content    = file("${path.module}/../infrastructure/worker.js")
 
   r2_bucket_binding {
     name        = "R2"
     bucket_name = cloudflare_r2_bucket.sites.name
+  }
+
+  # Domain the Worker serves (read as a global in worker.js).
+  plain_text_binding {
+    name = "DOMAIN"
+    text = var.domain
   }
 }
 

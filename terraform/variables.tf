@@ -14,3 +14,15 @@ variable "domain" {
   default     = "sitesmyth.com"
   description = "Primary domain"
 }
+
+variable "worker_name" {
+  type        = string
+  default     = "sitesmyth-worker"
+  description = "Cloudflare Worker script name"
+}
+
+variable "bucket_name" {
+  type        = string
+  default     = "sitesmyth-demos"
+  description = "R2 bucket name for hosted sites"
+}

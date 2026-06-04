@@ -112,6 +112,7 @@ Full walkthrough — domain, DNS, Terraform, tunnel — in [docs/SETUP.md](docs/
 
 ## Docs
 
+- [docs/DEPLOY_YOUR_OWN.md](docs/DEPLOY_YOUR_OWN.md) — host on **your own domain** (wrangler CI / Terraform / Cloudflare MCP)
 - [docs/SETUP.md](docs/SETUP.md) — domain → Cloudflare → Workers + R2 (Terraform)
 - [docs/MANUAL_BUILD_WORKFLOW.md](docs/MANUAL_BUILD_WORKFLOW.md) — agent-driven manual builds
 - [docs/ARCHITECTURE_OPTIONS.md](docs/ARCHITECTURE_OPTIONS.md) — design trade-offs

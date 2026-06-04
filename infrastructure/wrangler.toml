@@ -2,11 +2,19 @@ name = "sitesmyth-worker"
 main = "worker.js"
 compatibility_date = "2024-01-01"
 
+# Your Cloudflare account ID (also settable via CLOUDFLARE_ACCOUNT_ID env / secret).
+# account_id = "your_account_id"
+
+[vars]
+# The domain this Worker serves. Change to your own domain.
+DOMAIN = "sitesmyth.com"
+
 [[r2_buckets]]
 binding = "R2"
+# Must match the R2 bucket you created. Rename for your own deploy.
 bucket_name = "sitesmyth-demos"
 
-# Routes: add after domain is on Cloudflare
+# Routes: uncomment and swap sitesmyth.com for your domain AFTER it is on Cloudflare.
 # [[routes]]
 # pattern = "*.sitesmyth.com/*"
 # zone_name = "sitesmyth.com"

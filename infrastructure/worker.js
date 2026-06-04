@@ -1,8 +1,10 @@
 /**
- * Cloudflare Worker — serves sites from R2 based on subdomain
- * Route: *.sitesmyth.com/*
- * Root (sitesmyth.com, www.sitesmyth.com) → _marketing/
- * {slug}.sitesmyth.com → sites/{slug}/
+ * Cloudflare Worker — serves sites from R2 based on subdomain.
+ * Domain comes from the DOMAIN var in wrangler.toml ([vars]) / Terraform.
+ * In service-worker format, [vars] and bindings are exposed as globals.
+ * Route: *.<DOMAIN>/*
+ * Root (<DOMAIN>, www.<DOMAIN>) → _marketing/
+ * {slug}.<DOMAIN> → sites/{slug}/
  */
 
 const MIME = {
@@ -33,8 +35,11 @@ async function handleRequest(request) {
   const url = new URL(request.url);
   const hostname = url.hostname;
 
-  const isRoot = hostname === 'sitesmyth.com' || hostname === 'www.sitesmyth.com';
-  const subdomain = hostname.replace('.sitesmyth.com', '').replace('www.', '');
+  // DOMAIN is injected via wrangler.toml [vars]; fall back to the apex if unset.
+  const domain = typeof DOMAIN !== 'undefined' && DOMAIN ? DOMAIN : hostname;
+
+  const isRoot = hostname === domain || hostname === `www.${domain}`;
+  const subdomain = hostname.replace(`.${domain}`, '').replace(/^www\./, '');
 
   let prefix, path;
   if (isRoot || subdomain === 'www' || subdomain === '') {

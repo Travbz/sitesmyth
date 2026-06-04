@@ -2,4 +2,8 @@
 
 cloudflare_account_id = "your_account_id"
 cloudflare_api_token  = "your_api_token"
-domain                = "sitesmyth.com"
+domain                = "yourdomain.com"
+
+# Optional — override the defaults if you want your own resource names:
+# worker_name = "yourdomain-worker"
+# bucket_name = "yourdomain-demos"
