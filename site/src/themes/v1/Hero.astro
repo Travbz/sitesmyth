@@ -1,6 +1,5 @@
 ---
 import HeroText from '../../components/HeroText.astro';
-import Drafting from './Drafting';
 
 // The drawing drafts itself: every stroke uses pathLength=1 so one dash rule
 // animates them all, staggered by --i. Reduced motion shows it finished.
@@ -68,7 +67,6 @@ import Drafting from './Drafting';
         <span>SHEET 1 OF 1</span>
         <span>SCALE: TO YOUR BUSINESS</span>
       </figcaption>
-      <Drafting client:idle />
     </figure>
   </div>
 </section>

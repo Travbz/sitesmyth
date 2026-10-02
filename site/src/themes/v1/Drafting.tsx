@@ -1,43 +1,72 @@
-import { createSignal, onMount, Show } from 'solid-js';
+import { createSignal, onCleanup, onMount, Show } from 'solid-js';
 
-// CAD crosshair that follows the pointer across the drafting board.
-// Decorative only: fine pointers get it, touch and reduced motion skip it.
+// Site-wide drafting layer, mounted once per page.
+// A CAD crosshair follows the pointer everywhere. Over a measurable part of
+// the page it reads out that part's size and the part gets registration ticks.
+// Fine pointers only; reduced motion keeps the measuring but drops easing.
+const MEASURE = '.svc, .work-item .viewer-frame, .owned, .step, .need, .ind-list a, .board, .faq details, .field input, .field textarea, .field select, .btn';
+
 export default function Drafting() {
   const [on, setOn] = createSignal(false);
-  const [pos, setPos] = createSignal({ x: 0, y: 0 });
-  let board: HTMLDivElement | undefined;
-  let raf = 0;
+  const [x, setX] = createSignal(0);
+  const [y, setY] = createSignal(0);
+  const [dims, setDims] = createSignal('');
 
   onMount(() => {
     const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!fine || still || !board) return;
-    const host = board.closest('.hero') as HTMLElement | null;
-    if (!host) return;
-    const move = (e: PointerEvent) => {
-      if (raf) return;
-      raf = requestAnimationFrame(() => {
-        raf = 0;
-        const r = host.getBoundingClientRect();
-        const x = e.clientX - r.left;
-        const y = e.clientY - r.top;
-        host.style.setProperty('--cx', `${x}px`);
-        host.style.setProperty('--cy', `${y}px`);
-        setPos({ x: Math.round(x), y: Math.round(y) });
-      });
+    if (!fine) return;
+    let raf = 0;
+    let last: PointerEvent | null = null;
+    let measured: HTMLElement | null = null;
+    const root = document.documentElement;
+
+    const paint = () => {
+      raf = 0;
+      const e = last;
+      if (!e) return;
+      root.style.setProperty('--cx', `${e.clientX}px`);
+      root.style.setProperty('--cy', `${e.clientY}px`);
+      setX(Math.round(e.clientX));
+      setY(Math.round(e.clientY + window.scrollY));
+      const el = (e.target as Element | null)?.closest?.(MEASURE) as HTMLElement | null;
+      if (measured && measured !== el) measured.removeAttribute('data-measured');
+      measured = el;
+      if (el) {
+        el.setAttribute('data-measured', '');
+        const r = el.getBoundingClientRect();
+        setDims(`${Math.round(r.width)} × ${Math.round(r.height)}`);
+      } else {
+        setDims('');
+      }
     };
-    host.addEventListener('pointermove', move, { passive: true });
-    host.addEventListener('pointerenter', () => setOn(true));
-    host.addEventListener('pointerleave', () => setOn(false));
+    const move = (e: PointerEvent) => {
+      last = e;
+      setOn(true);
+      if (!raf) raf = requestAnimationFrame(paint);
+    };
+    const leave = () => {
+      setOn(false);
+      measured?.removeAttribute('data-measured');
+      measured = null;
+    };
+    document.addEventListener('pointermove', move, { passive: true });
+    document.documentElement.addEventListener('pointerleave', leave);
+    onCleanup(() => {
+      cancelAnimationFrame(raf);
+      document.removeEventListener('pointermove', move);
+      document.documentElement.removeEventListener('pointerleave', leave);
+    });
   });
 
   return (
-    <div class="crosshair-host" ref={board} aria-hidden="true">
-      <Show when={on()}>
+    <Show when={on()}>
+      <div class="crosshair" aria-hidden="true">
         <span class="crosshair-x" />
         <span class="crosshair-y" />
-        <span class="crosshair-read">{pos().x} , {pos().y}</span>
-      </Show>
-    </div>
+        <span class="crosshair-read">
+          <Show when={dims()} fallback={<>X {x()}  Y {y()}</>}>W × H  {dims()}</Show>
+        </span>
+      </div>
+    </Show>
   );
 }

@@ -72,7 +72,7 @@ h3 { font-size: 1.2rem; font-weight: 600; }
 }
 
 /* Hero: copy beside the drafting board, crosshair active over the whole band */
-.hero { position: relative; padding-block: clamp(3rem, 8vw, 6.5rem); overflow: clip; cursor: crosshair; }
+.hero { position: relative; padding-block: clamp(3rem, 8vw, 6.5rem); overflow: clip; }
 .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
 .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); max-width: 14ch; }
 .hero .lede { margin-top: 1.5rem; color: var(--fg); font-size: 1.2rem; }
@@ -81,7 +81,6 @@ h3 { font-size: 1.2rem; font-weight: 600; }
 .explore ul { border-top: 1px solid var(--line); padding-top: .75rem; }
 
 @media (max-width: 860px) {
-  .hero { cursor: auto; }
   .hero-grid { grid-template-columns: 1fr; }
 }
 
@@ -118,16 +117,43 @@ h3 { font-size: 1.2rem; font-weight: 600; }
 @keyframes draft { to { stroke-dashoffset: 0; } }
 @keyframes note-in { to { opacity: 1; } }
 
-/* CAD crosshair follows the pointer; only mounted for fine pointers */
-.crosshair-host { position: absolute; inset: 0; pointer-events: none; }
-.crosshair-x, .crosshair-y { position: absolute; background: color-mix(in srgb, var(--accent) 55%, transparent); }
+/* CAD crosshair follows the pointer across every page; fine pointers only */
+.crosshair { position: fixed; inset: 0; pointer-events: none; z-index: 90; }
+.crosshair-x, .crosshair-y { position: absolute; background: color-mix(in srgb, var(--accent) 40%, transparent); }
 .crosshair-x { left: 0; right: 0; top: var(--cy, -10px); height: 1px; }
 .crosshair-y { top: 0; bottom: 0; left: var(--cx, -10px); width: 1px; }
 .crosshair-read {
   position: absolute; left: var(--cx, 0); top: var(--cy, 0);
-  transform: translate(.75rem, .75rem);
-  font-family: var(--font-display); font-size: .7rem; letter-spacing: .1em; color: var(--accent);
+  transform: translate(.85rem, .85rem); white-space: pre;
+  padding: .2rem .45rem; background: color-mix(in srgb, var(--surface) 85%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  font-family: var(--font-display); font-size: .7rem; letter-spacing: .08em; color: var(--accent);
 }
+
+/* Measured parts get registration ticks at their corners */
+[data-measured] {
+  outline: 1px dashed color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 6px;
+}
+.board[data-measured], .btn[data-measured] { outline-offset: 4px; }
+.field [data-measured] { outline-offset: 3px; }
+
+/* Every page header drafts a dimension line under its headline */
+.page-head h1 { position: relative; padding-bottom: 1.1rem; }
+.page-head h1::after {
+  content: ''; position: absolute; left: 0; bottom: 0; width: min(100%, 18rem); height: 9px;
+  background:
+    linear-gradient(var(--redline), var(--redline)) left center / 100% 1px no-repeat,
+    linear-gradient(var(--redline), var(--redline)) left top / 1px 100% no-repeat,
+    linear-gradient(var(--redline), var(--redline)) right top / 1px 100% no-repeat;
+  transform-origin: left;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .page-head h1::after { animation: dim-in .8s cubic-bezier(.2, .7, .2, 1) .25s both; }
+  .page-head .lede { animation: note-up .6s ease-out .55s both; }
+}
+@keyframes dim-in { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes note-up { from { opacity: 0; transform: translateY(.4rem); } to { opacity: 1; transform: none; } }
 
 /* Sections */
 .section + .section { border-top: 1px solid var(--line); }
