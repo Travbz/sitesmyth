@@ -238,7 +238,7 @@ a.viewer-frame:hover { box-shadow: 0 0 0 1px rgba(255, 123, 36, .8), 0 0 26px rg
 
 /* Footer */
 .site-footer { background: #14171d; padding-top: 4rem; border-top: 1px solid var(--line); }
-.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 2rem; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(2, 1fr); gap: 2rem; }
 .footer-name { font-family: var(--font-display); font-weight: 800; font-size: 1.8rem; text-transform: uppercase; }
 .footer-brand p + p { color: var(--muted); margin-block: .5rem 1.25rem; }
 .footer-h { font-weight: 700; margin-bottom: .75rem; }

@@ -131,7 +131,7 @@ h3 { font-size: 1.3rem; letter-spacing: -0.015em; }
 .cta-band p { max-width: 36rem; color: #c3c8d1; }
 
 .site-footer { padding-top: 4rem; border-top: 1px solid var(--line); }
-.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 2rem; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(2, 1fr); gap: 2rem; }
 .footer-name { font-family: var(--font-display); font-weight: 800; font-size: 1.35rem; }
 .footer-brand p + p { color: var(--muted); margin-block: .5rem 1.25rem; }
 .footer-h { font-weight: 700; margin-bottom: .75rem; }

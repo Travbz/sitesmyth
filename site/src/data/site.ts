@@ -355,7 +355,6 @@ export const HOME = {
   explore: [
     { href: '/work/', label: 'See the sites we have built' },
     { href: '/services/', label: 'What we build' },
-    { href: '/websites-for/', label: 'Websites by industry' },
     { href: '/own-your-website/', label: 'How the handoff works' },
   ],
 };

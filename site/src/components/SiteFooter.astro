@@ -1,5 +1,5 @@
 ---
-import { SERVICES, INDUSTRIES } from '../data/site';
+import { SERVICES } from '../data/site';
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
@@ -12,10 +12,6 @@ const year = new Date().getFullYear();
     <nav aria-label="Services">
       <p class="footer-h">Services</p>
       <ul role="list">{SERVICES.map((s) => <li><a href={`/services/${s.slug}/`}>{s.nav}</a></li>)}</ul>
-    </nav>
-    <nav aria-label="Industries">
-      <p class="footer-h">Industries</p>
-      <ul role="list">{INDUSTRIES.map((i) => <li><a href={`/websites-for/${i.slug}/`}>{i.short}</a></li>)}</ul>
     </nav>
     <nav aria-label="Company">
       <p class="footer-h">More</p>

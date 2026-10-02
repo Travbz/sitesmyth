@@ -126,7 +126,7 @@ h3 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; }
 .cta-band p { max-width: 34rem; }
 
 .site-footer { background: var(--fg); color: #fff; padding-top: 4rem; }
-.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 2rem; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(2, 1fr); gap: 2rem; }
 .footer-name { font-weight: 800; font-size: 1.75rem; }
 .footer-brand p + p { color: #b8c4bf; margin-block: .5rem 1.25rem; }
 .footer-brand .btn-primary { background: var(--gold); color: var(--fg); }
