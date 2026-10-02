@@ -9,7 +9,8 @@ const variant = process.env.VARIANT || 'v1';
 export default defineConfig({
   site: 'https://sitesmyth.com',
   trailingSlash: 'always',
-  outDir: `./dist/${variant}`,
+  // The indexable production build gets its own folder so it never overwrites a noindex preview.
+  outDir: process.env.PROD === '1' ? './dist/prod' : `./dist/${variant}`,
   integrations: [solid(), sitemap({ filter: (p) => !p.includes('/404') })],
   vite: {
     resolve: {

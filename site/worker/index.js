@@ -24,6 +24,11 @@ async function notify(env, lead) {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    // One canonical host: www goes to the apex.
+    if (url.hostname.startsWith('www.')) {
+      url.hostname = url.hostname.slice(4);
+      return Response.redirect(url.toString(), 301);
+    }
     if (url.pathname !== '/api/contact') return env.ASSETS.fetch(request);
     if (request.method !== 'POST') return json({ error: 'Use POST.' }, 405);
 

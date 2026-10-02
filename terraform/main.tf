@@ -48,19 +48,8 @@ resource "cloudflare_workers_route" "wildcard" {
   script_name = cloudflare_workers_script.sitesmyth.name
 }
 
-# Route: sitesmyth.com (root)
-resource "cloudflare_workers_route" "root" {
-  zone_id     = data.cloudflare_zone.sitesmyth.id
-  pattern     = "${var.domain}/*"
-  script_name = cloudflare_workers_script.sitesmyth.name
-}
-
-# Route: www.sitesmyth.com
-resource "cloudflare_workers_route" "www" {
-  zone_id     = data.cloudflare_zone.sitesmyth.id
-  pattern     = "www.${var.domain}/*"
-  script_name = cloudflare_workers_script.sitesmyth.name
-}
+# sitesmyth.com and www.sitesmyth.com belong to the sitesmyth-site Worker
+# (site/scripts/deploy.mjs prod). This Worker keeps the wildcard for demo subdomains.
 
 # Wildcard DNS — all subdomains route through Cloudflare proxy → Worker
 resource "cloudflare_record" "wildcard" {
