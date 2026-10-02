@@ -347,5 +347,15 @@ export const HOME = {
   description:
     'Fast, search-ready websites for small businesses, from one-page sites to full sites with service, city, and menu pages. Your domain, your GitHub, your Cloudflare.',
   h1: 'Small business websites you own outright',
-  lede: 'We build fast websites that show up in search, then hand them over. Your domain, your code, and your hosting stay in your name, so the site is yours the day it launches.',
+  lede: 'SiteSmyth designs and builds websites for local businesses, then hands them over. Your domain, your code, and your hosting are in your name from day one.',
+  body: [
+    'Some businesses need one clean page that says what they do and how to reach them. Others need a page for each service, each town they drive to, or each item on the menu, so customers searching for any of those find them. We build both, fast and ready for search.',
+    'Before any work starts, you open your own accounts and add us to them. We build the site inside those accounts. When the job is paid, there is nothing to transfer, because it was yours the whole time.',
+  ],
+  explore: [
+    { href: '/work/', label: 'See the sites we have built' },
+    { href: '/services/', label: 'What we build' },
+    { href: '/websites-for/', label: 'Websites by industry' },
+    { href: '/own-your-website/', label: 'How the handoff works' },
+  ],
 };

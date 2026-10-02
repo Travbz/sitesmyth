@@ -1,13 +1,19 @@
 ---
 import { SERVICES } from '../data/site';
-interface Props { exclude?: string }
-const { exclude } = Astro.props;
+// Full list with summaries lives on /services/ only. Elsewhere, pass compact for plain links.
+interface Props { exclude?: string; compact?: boolean }
+const { exclude, compact } = Astro.props;
+const items = SERVICES.filter((s) => s.slug !== exclude);
 ---
-<ul class="svc-list" role="list">
-  {SERVICES.filter((s) => s.slug !== exclude).map((s) => (
-    <li class="svc">
-      <h3><a href={`/services/${s.slug}/`}>{s.h1}</a></h3>
-      <p>{s.intro}</p>
-    </li>
-  ))}
-</ul>
+{compact ? (
+  <ul class="link-list" role="list">{items.map((s) => <li><a href={`/services/${s.slug}/`}>{s.title}</a></li>)}</ul>
+) : (
+  <ul class="svc-list" role="list">
+    {items.map((s) => (
+      <li class="svc">
+        <h2><a href={`/services/${s.slug}/`}>{s.h1}</a></h2>
+        <p>{s.description}</p>
+      </li>
+    ))}
+  </ul>
+)}

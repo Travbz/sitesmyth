@@ -1,5 +1,6 @@
 ---
 import { WORK } from '../data/site';
+import ShotToggle from './ShotToggle';
 interface Props { only?: string[]; headingLevel?: 'h2' | 'h3' }
 const { only, headingLevel = 'h2' } = Astro.props;
 const items = only ? WORK.filter((w) => only.includes(w.slug)) : WORK;
@@ -7,10 +8,8 @@ const H = headingLevel;
 ---
 <ul class="work-list" role="list">
   {items.map((w) => (
-    <li class="work-item">
-      <a class="work-shot" href={w.url} target="_blank" rel="noopener" aria-label={`Visit ${w.domain}`}>
-        <img src={`/work/${w.slug}-desktop.webp`} width="1200" height="750" alt={`Home page of the ${w.name} website`} loading="lazy" decoding="async" />
-      </a>
+    <li class="work-item" id={w.slug}>
+      <div class="work-shot"><ShotToggle client:visible slug={w.slug} name={w.name} url={w.url} /></div>
       <div class="work-body">
         <H class="work-name">{w.name}</H>
         <p class="work-meta">{w.kind}, {w.place}. {w.pages}.</p>

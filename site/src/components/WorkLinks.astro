@@ -1,0 +1,14 @@
+---
+import { WORK } from '../data/site';
+interface Props { only: string[] }
+const items = WORK.filter((w) => Astro.props.only.includes(w.slug));
+---
+<ul class="work-links" role="list">
+  {items.map((w) => (
+    <li>
+      <a href={`/work/#${w.slug}`}>{w.name}</a>
+      <span>{w.kind}, {w.place}.</span>
+      <a class="live" href={w.url} target="_blank" rel="noopener">Visit {w.domain}</a>
+    </li>
+  ))}
+</ul>

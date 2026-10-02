@@ -2,7 +2,6 @@
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import ServiceList from '../../components/ServiceList.astro';
-import IndustryList from '../../components/IndustryList.astro';
 import CtaBand from '../../components/CtaBand.astro';
 
 const crumbs = [{ name: 'Services', path: '/services/' }];
@@ -19,10 +18,6 @@ const crumbs = [{ name: 'Services', path: '/services/' }];
   </header>
   <section class="section section-tight wrap" aria-label="Services">
     <ServiceList />
-  </section>
-  <section class="section wrap" aria-labelledby="ind-h">
-    <div class="section-head"><h2 id="ind-h">Websites by industry</h2></div>
-    <IndustryList />
   </section>
   <CtaBand />
 </Base>

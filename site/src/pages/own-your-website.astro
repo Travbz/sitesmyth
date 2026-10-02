@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Crumbs from '../components/Crumbs.astro';
 import Owned from '../components/Owned.astro';
+import Steps from '../components/Steps.astro';
 import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
 
@@ -39,6 +40,10 @@ const schema = [{ '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Q
       <p class="lede">Every account is created in your name before the build starts. You add us as a collaborator, we do the work, and you can remove us whenever you like.</p>
     </div>
     <Owned />
+  </section>
+  <section class="section wrap" aria-labelledby="steps-h">
+    <div class="section-head"><h2 id="steps-h">How a website build and handoff works</h2></div>
+    <Steps />
   </section>
   <section class="section wrap narrow" aria-labelledby="faq-h">
     <div class="section-head"><h2 id="faq-h">Questions about owning your website</h2></div>

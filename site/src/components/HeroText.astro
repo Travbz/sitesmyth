@@ -1,0 +1,12 @@
+---
+import { HOME } from '../data/site';
+---
+<h1>{HOME.h1}</h1>
+<p class="lede">{HOME.lede}</p>
+<div class="hero-body">{HOME.body.map((p) => <p>{p}</p>)}</div>
+<div class="hero-actions">
+  <a class="btn btn-primary" href="/contact/">Get a website quote</a>
+</div>
+<nav class="explore" aria-label="Explore">
+  <ul role="list">{HOME.explore.map((e) => <li><a href={e.href}>{e.label}</a></li>)}</ul>
+</nav>

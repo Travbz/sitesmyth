@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
-import WorkList from '../../components/WorkList.astro';
+import WorkLinks from '../../components/WorkLinks.astro';
 import IndustryList from '../../components/IndustryList.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { INDUSTRIES, SITE, type Industry } from '../../data/site';
@@ -30,7 +30,7 @@ const schema = [{ '@type': 'Service', name: ind.h1, description: ind.description
   </section>
   <section class="section wrap" aria-labelledby="ex-h">
     <div class="section-head"><h2 id="ex-h">A site we built in this industry</h2></div>
-    <WorkList only={ind.examples} headingLevel="h3" />
+    <WorkLinks only={ind.examples} />
   </section>
   <section class="section wrap" aria-labelledby="more-h">
     <div class="section-head"><h2 id="more-h">Other industries</h2></div>

@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
-import WorkList from '../../components/WorkList.astro';
+import WorkLinks from '../../components/WorkLinks.astro';
 import ServiceList from '../../components/ServiceList.astro';
 import Faq from '../../components/Faq.astro';
 import CtaBand from '../../components/CtaBand.astro';
@@ -33,7 +33,7 @@ const schema = [
   </section>
   <section class="section wrap" aria-labelledby="ex-h">
     <div class="section-head"><h2 id="ex-h">{s.nav} we have built</h2></div>
-    <WorkList only={s.examples} headingLevel="h3" />
+    <WorkLinks only={s.examples} />
   </section>
   <section class="section wrap narrow" aria-labelledby="faq-h">
     <div class="section-head"><h2 id="faq-h">Questions about {s.nav.toLowerCase()}</h2></div>
@@ -41,7 +41,7 @@ const schema = [
   </section>
   <section class="section wrap" aria-labelledby="other-h">
     <div class="section-head"><h2 id="other-h">Other website services</h2></div>
-    <ServiceList exclude={s.slug} />
+    <ServiceList exclude={s.slug} compact />
   </section>
   <CtaBand />
 </Base>

@@ -1,20 +1,18 @@
 ---
-import WorkViewer from '../../components/WorkViewer';
-import { HOME, WORK } from '../../data/site';
+import HeroText from '../../components/HeroText.astro';
+// A drawing of the kind of site we build, on the customer's own domain.
+const pages = ['Services', 'Service area', 'Menu', 'Gallery', 'Contact'];
 ---
 <section class="hero">
   <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <h1>{HOME.h1}</h1>
-      <p class="lede">{HOME.lede}</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="/contact/">Get a website quote</a>
-        <a class="btn btn-ghost" href="/work/">Full portfolio</a>
+    <div class="hero-copy"><HeroText /></div>
+    <figure class="sketch" aria-hidden="true">
+      <div class="sketch-bar"><span class="dots"></span><span class="addr">yourbusiness.com</span></div>
+      <div class="sketch-page">
+        <div class="sk-hero"><span class="sk-line w70"></span><span class="sk-line w45"></span><span class="sk-btn"></span></div>
+        <div class="sk-tabs">{pages.map((p, i) => <span style={`--i:${i}`}>{p}</span>)}</div>
+        <div class="sk-grid"><span></span><span></span><span></span></div>
       </div>
-    </div>
-    <div class="hero-work">
-      <h2 class="sr-only">Small business websites we have built</h2>
-      <WorkViewer client:load items={WORK} />
-    </div>
+    </figure>
   </div>
 </section>

@@ -1,5 +1,5 @@
 ---
-import { HOME } from '../../data/site';
+import HeroText from '../../components/HeroText.astro';
 const rows = [
   { k: 'Domain name', v: 'Registered to your business' },
   { k: 'Website code', v: 'Held in your GitHub account' },
@@ -8,14 +8,7 @@ const rows = [
 ---
 <section class="hero">
   <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <h1>{HOME.h1}</h1>
-      <p class="lede">{HOME.lede}</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="/contact/">Get a website quote</a>
-        <a class="btn btn-ghost" href="/work/">See the portfolio</a>
-      </div>
-    </div>
+    <div class="hero-copy"><HeroText /></div>
     <figure class="deed" aria-label="What you own when your site launches">
       <p class="deed-title">Title to your website</p>
       <dl>
@@ -23,7 +16,7 @@ const rows = [
           <div class="deed-row"><dt>{r.k}</dt><dd>{r.v}</dd></div>
         ))}
       </dl>
-      <p class="deed-sign">Transferred in full at launch</p>
+      <p class="deed-sign">Yours from day one</p>
       <div class="seal" aria-hidden="true">
         <svg viewBox="0 0 120 120"><defs><path id="sc" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" /></defs>
           <circle cx="60" cy="60" r="56" /><circle cx="60" cy="60" r="34" class="inner" />
