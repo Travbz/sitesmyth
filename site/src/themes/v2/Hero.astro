@@ -1,6 +1,13 @@
 ---
 import HeroText from '../../components/HeroText.astro';
+import Sparks from './Sparks';
+
+// The headline lands like a hammer blow; sparks answer it, embers keep rising.
 ---
 <section class="hero">
-  <div class="wrap hero-copy"><HeroText /></div>
+  <Sparks client:idle />
+  <div class="wrap hero-inner">
+    <HeroText />
+  </div>
+  <div class="heat-floor" aria-hidden="true"></div>
 </section>
