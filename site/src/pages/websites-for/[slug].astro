@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import WorkList from '../../components/WorkList.astro';
+import IndustryList from '../../components/IndustryList.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { INDUSTRIES, SITE, type Industry } from '../../data/site';
+
+export function getStaticPaths() {
+  return INDUSTRIES.map((i) => ({ params: { slug: i.slug }, props: { ind: i } }));
+}
+const { ind } = Astro.props as { ind: Industry };
+const crumbs = [{ name: 'Industries', path: '/websites-for/' }, { name: ind.title, path: `/websites-for/${ind.slug}/` }];
+const schema = [{ '@type': 'Service', name: ind.h1, description: ind.description, provider: { '@id': `${SITE.url}/#org` }, serviceType: 'Website design' }];
+---
+<Base title={ind.title} description={ind.description} crumbs={crumbs} schema={schema}>
+  <header class="page-head wrap">
+    <Crumbs items={crumbs} />
+    <h1>{ind.h1}</h1>
+    <p class="lede">{ind.intro}</p>
+    <a class="btn btn-primary head-cta" href="/contact/">Get a website quote</a>
+  </header>
+  <section class="section section-tight wrap" aria-labelledby="needs-h">
+    <div class="section-head"><h2 id="needs-h">What the site needs to do</h2></div>
+    <div class="needs">
+      {ind.needs.map((n) => (
+        <div class="need"><h3>{n.h}</h3><p>{n.p}</p></div>
+      ))}
+    </div>
+  </section>
+  <section class="section wrap" aria-labelledby="ex-h">
+    <div class="section-head"><h2 id="ex-h">A site we built in this industry</h2></div>
+    <WorkList only={ind.examples} headingLevel="h3" />
+  </section>
+  <section class="section wrap" aria-labelledby="more-h">
+    <div class="section-head"><h2 id="more-h">Other industries</h2></div>
+    <IndustryList exclude={ind.slug} />
+  </section>
+  <CtaBand />
+</Base>

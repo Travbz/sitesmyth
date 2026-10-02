@@ -1,0 +1,20 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import IndustryList from '../../components/IndustryList.astro';
+import CtaBand from '../../components/CtaBand.astro';
+const crumbs = [{ name: 'Industries', path: '/websites-for/' }];
+---
+<Base
+  title="Website Design by Industry"
+  description="Websites built for how customers search in your trade: HVAC companies, fire sprinkler contractors, restaurants and bars, and cleaning businesses."
+  crumbs={crumbs}
+>
+  <header class="page-head wrap">
+    <Crumbs items={crumbs} />
+    <h1>Website design by industry</h1>
+    <p class="lede">Every trade gets searched differently. These pages cover what a site in your industry needs, with a live example for each one.</p>
+  </header>
+  <section class="section section-tight wrap" aria-label="Industries"><IndustryList /></section>
+  <CtaBand />
+</Base>

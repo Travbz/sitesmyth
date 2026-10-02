@@ -1,0 +1,55 @@
+---
+import { HOME } from '../../data/site';
+// Storefronts are the real client sites. The last lot is open.
+const shops = [
+  { x: 40, w: 250, h: 250, wall: '#9c3a25', trim: '#f2e6d0', awn: ['#f2e6d0', '#134437'], sign: 'Loos & Sons HVAC' },
+  { x: 300, w: 230, h: 300, wall: '#2f5d7c', trim: '#f2e6d0', awn: ['#d4a72c', '#f2e6d0'], sign: 'Elevation Fire' },
+  { x: 540, w: 250, h: 230, wall: '#d4a72c', trim: '#1f2a26', awn: ['#e86f2c', '#f2e6d0'], sign: 'The Tipsy Trout' },
+  { x: 800, w: 210, h: 270, wall: '#6f8f7a', trim: '#f2e6d0', awn: ['#7d3c5c', '#f2e6d0'], sign: 'V Sandoval' },
+];
+const ground = 380;
+---
+<section class="hero">
+  <div class="wrap hero-copy">
+    <h1>{HOME.h1}</h1>
+    <p class="lede">{HOME.lede}</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/contact/">Get a website quote</a>
+      <a class="btn btn-ghost" href="/work/">See the portfolio</a>
+    </div>
+  </div>
+  <div class="street" role="img" aria-label="A main street of storefronts for businesses we built sites for, with one empty lot for yours">
+    <svg viewBox="0 0 1280 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <rect x="0" y={ground} width="1280" height="40" fill="#c9c2b4" />
+      <rect x="0" y={ground} width="1280" height="4" fill="#1f2a26" />
+      {shops.map((s, i) => {
+        const top = ground - s.h;
+        const winY = top + 70;
+        return (
+          <g class="shop" style={`--d:${0.35 + i * 0.28}s`}>
+            <rect x={s.x} y={top} width={s.w} height={s.h} fill={s.wall} />
+            <rect x={s.x - 6} y={top - 10} width={s.w + 12} height="14" fill={s.trim} />
+            <rect x={s.x + 16} y={top + 16} width={s.w - 32} height="40" fill={s.trim} />
+            <text x={s.x + s.w / 2} y={top + 43} text-anchor="middle" class="sign" fill={s.wall}>{s.sign}</text>
+            {[0, 1, 2].map((k) => (
+              <rect class="win" x={s.x + 22 + k * ((s.w - 44) / 3)} y={winY} width={(s.w - 44) / 3 - 12} height={s.h - 190} />
+            ))}
+            {Array.from({ length: 8 }).map((_, k) => (
+              <rect x={s.x + 10 + k * ((s.w - 20) / 8)} y={ground - 108} width={(s.w - 20) / 8} height="22" fill={s.awn[k % 2]} />
+            ))}
+            <rect class="win" x={s.x + 20} y={ground - 80} width={s.w - 100} height="80" />
+            <rect x={s.x + s.w - 64} y={ground - 84} width="44" height="84" fill="#1f2a26" />
+            <circle cx={s.x + s.w - 28} cy={ground - 40} r="3" fill={s.trim} />
+          </g>
+        );
+      })}
+      <g class="lot">
+        <rect x="1030" y={ground - 210} width="210" height="210" fill="none" stroke="#134437" stroke-width="3" stroke-dasharray="10 8" />
+        <rect x="1060" y={ground - 150} width="150" height="60" fill="#d4a72c" />
+        <text x="1135" y={ground - 124} text-anchor="middle" class="sign lot-sign">Your business</text>
+        <text x="1135" y={ground - 102} text-anchor="middle" class="sign lot-sub">coming soon</text>
+        <rect x="1131" y={ground - 90} width="8" height="90" fill="#134437" />
+      </g>
+    </svg>
+  </div>
+</section>

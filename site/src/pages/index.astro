@@ -1,0 +1,79 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '@theme/Hero.astro';
+import { HERO_SHOWS_WORK } from '@theme/config';
+import WorkViewer from '../components/WorkViewer';
+import ServiceList from '../components/ServiceList.astro';
+import IndustryList from '../components/IndustryList.astro';
+import Steps from '../components/Steps.astro';
+import Owned from '../components/Owned.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { HOME, WORK, SITE } from '../data/site';
+
+const schema = [
+  {
+    '@type': 'ProfessionalService',
+    name: SITE.name,
+    url: SITE.url,
+    description: HOME.description,
+    serviceType: ['Website design', 'Landing page design', 'Local SEO pages', 'Website redesign'],
+  },
+];
+---
+<Base title={HOME.title} description={HOME.description} schema={schema}>
+  <Hero />
+
+  {!HERO_SHOWS_WORK && (
+    <section class="section section-work" aria-labelledby="work-h">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="work-h">Small business websites we have built</h2>
+          <p class="lede">Real sites for real businesses, live right now. Flip between desktop and phone to see how each one holds up.</p>
+        </div>
+        <WorkViewer client:visible items={WORK} />
+        <p class="more"><a href="/work/">See the full portfolio</a></p>
+      </div>
+    </section>
+  )}
+
+  <section class="section section-services" aria-labelledby="svc-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="svc-h">Website design services</h2>
+        <p class="lede">From a single landing page to a full site with a page for every service, town, and menu item.</p>
+      </div>
+      <ServiceList />
+    </div>
+  </section>
+
+  <section class="section section-owned" aria-labelledby="own-h">
+    <div class="wrap own-grid">
+      <div class="section-head">
+        <h2 id="own-h">Own your website, your domain, and your hosting</h2>
+        <p class="lede">Everything that makes up your site is set up in your name before we write a line of code.</p>
+        <p><a href="/own-your-website/">Why owning your website matters</a></p>
+      </div>
+      <Owned />
+    </div>
+  </section>
+
+  <section class="section section-steps" aria-labelledby="steps-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="steps-h">How a website build works</h2>
+      </div>
+      <Steps />
+    </div>
+  </section>
+
+  <section class="section section-industries" aria-labelledby="ind-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="ind-h">Websites for local trades, restaurants, and service businesses</h2>
+      </div>
+      <IndustryList />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

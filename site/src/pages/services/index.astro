@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import ServiceList from '../../components/ServiceList.astro';
+import IndustryList from '../../components/IndustryList.astro';
+import CtaBand from '../../components/CtaBand.astro';
+
+const crumbs = [{ name: 'Services', path: '/services/' }];
+---
+<Base
+  title="Website Design Services for Small Businesses"
+  description="Landing pages, full multi-page websites, local SEO city pages, and redesigns off Wix, GoDaddy, or WordPress. Every site handed over to you."
+  crumbs={crumbs}
+>
+  <header class="page-head wrap">
+    <Crumbs items={crumbs} />
+    <h1>Website design services for small businesses</h1>
+    <p class="lede">Pick the size of site your business needs today. Every one of them is built so it can grow later without starting over.</p>
+  </header>
+  <section class="section section-tight wrap" aria-label="Services">
+    <ServiceList />
+  </section>
+  <section class="section wrap" aria-labelledby="ind-h">
+    <div class="section-head"><h2 id="ind-h">Websites by industry</h2></div>
+    <IndustryList />
+  </section>
+  <CtaBand />
+</Base>

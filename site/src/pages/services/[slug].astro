@@ -1,0 +1,47 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import WorkList from '../../components/WorkList.astro';
+import ServiceList from '../../components/ServiceList.astro';
+import Faq from '../../components/Faq.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { SERVICES, SITE, type Service } from '../../data/site';
+
+export function getStaticPaths() {
+  return SERVICES.map((s) => ({ params: { slug: s.slug }, props: { s } }));
+}
+const { s } = Astro.props as { s: Service };
+const crumbs = [{ name: 'Services', path: '/services/' }, { name: s.nav, path: `/services/${s.slug}/` }];
+const schema = [
+  { '@type': 'Service', name: s.h1, description: s.description, provider: { '@id': `${SITE.url}/#org` }, serviceType: s.nav },
+  { '@type': 'FAQPage', mainEntity: s.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base title={s.title} description={s.description} crumbs={crumbs} schema={schema}>
+  <header class="page-head wrap">
+    <Crumbs items={crumbs} />
+    <h1>{s.h1}</h1>
+    <p class="lede">{s.intro}</p>
+    <a class="btn btn-primary head-cta" href="/contact/">Get a website quote</a>
+  </header>
+  <section class="section section-tight wrap split" aria-labelledby="inc-h">
+    <div>
+      <h2 id="inc-h">What is included</h2>
+      <p class="for-who"><strong>A good fit for:</strong> {s.forWho}</p>
+    </div>
+    <ul class="checklist" role="list">{s.includes.map((i) => <li>{i}</li>)}</ul>
+  </section>
+  <section class="section wrap" aria-labelledby="ex-h">
+    <div class="section-head"><h2 id="ex-h">{s.nav} we have built</h2></div>
+    <WorkList only={s.examples} headingLevel="h3" />
+  </section>
+  <section class="section wrap narrow" aria-labelledby="faq-h">
+    <div class="section-head"><h2 id="faq-h">Questions about {s.nav.toLowerCase()}</h2></div>
+    <Faq faqs={s.faqs} />
+  </section>
+  <section class="section wrap" aria-labelledby="other-h">
+    <div class="section-head"><h2 id="other-h">Other website services</h2></div>
+    <ServiceList exclude={s.slug} />
+  </section>
+  <CtaBand />
+</Base>

@@ -1,0 +1,36 @@
+---
+import { HOME } from '../../data/site';
+const rows = [
+  { k: 'Domain name', v: 'Registered to your business' },
+  { k: 'Website code', v: 'Held in your GitHub account' },
+  { k: 'Hosting', v: 'Runs on your Cloudflare account' },
+];
+---
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1>{HOME.h1}</h1>
+      <p class="lede">{HOME.lede}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/contact/">Get a website quote</a>
+        <a class="btn btn-ghost" href="/work/">See the portfolio</a>
+      </div>
+    </div>
+    <figure class="deed" aria-label="What you own when your site launches">
+      <p class="deed-title">Title to your website</p>
+      <dl>
+        {rows.map((r) => (
+          <div class="deed-row"><dt>{r.k}</dt><dd>{r.v}</dd></div>
+        ))}
+      </dl>
+      <p class="deed-sign">Transferred in full at launch</p>
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 120 120"><defs><path id="sc" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" /></defs>
+          <circle cx="60" cy="60" r="56" /><circle cx="60" cy="60" r="34" class="inner" />
+          <text><textPath href="#sc" textLength="272" lengthAdjust="spacing">YOURS TO KEEP · YOURS TO KEEP · YOURS TO KEEP ·</textPath></text>
+          <text x="60" y="68" text-anchor="middle" class="mono">S</text>
+        </svg>
+      </div>
+    </figure>
+  </div>
+</section>

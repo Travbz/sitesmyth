@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import ContactForm from '../../components/ContactForm';
+
+const crumbs = [{ name: 'Contact', path: '/contact/' }];
+---
+<Base
+  title="Get a Website Quote"
+  description="Tell us about your business and what you need from a website. We will reply by email with how we would build it."
+  crumbs={crumbs}
+  schema={[{ '@type': 'ContactPage', name: 'Get a website quote' }]}
+>
+  <header class="page-head wrap">
+    <Crumbs items={crumbs} />
+    <h1>Get a website quote</h1>
+    <p class="lede">A few details about your business is all it takes. We will reply by email with what your site needs and how we would build it.</p>
+  </header>
+  <section class="section section-tight wrap narrow" aria-label="Contact form">
+    <ContactForm client:load />
+  </section>
+</Base>

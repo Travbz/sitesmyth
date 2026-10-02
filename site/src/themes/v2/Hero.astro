@@ -1,0 +1,28 @@
+---
+import { HOME, WORK } from '../../data/site';
+---
+<section class="hero">
+  <div class="wrap">
+    <h1>{HOME.h1}</h1>
+    <div class="ember" aria-hidden="true"></div>
+    <div class="hero-row">
+      <p class="lede">{HOME.lede}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/contact/">Get a website quote</a>
+        <a class="btn btn-ghost" href="/work/">See the portfolio</a>
+      </div>
+    </div>
+  </div>
+  <div class="rack" aria-label="Recent sites">
+    <ul role="list" class="wrap rack-list">
+      {WORK.slice(0, 4).map((w) => (
+        <li>
+          <a href={w.url} target="_blank" rel="noopener">
+            <img src={`/work/${w.slug}-desktop.webp`} width="1200" height="750" alt="" loading="eager" />
+            <span>{w.name}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

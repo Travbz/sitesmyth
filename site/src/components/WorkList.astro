@@ -1,0 +1,25 @@
+---
+import { WORK } from '../data/site';
+interface Props { only?: string[]; headingLevel?: 'h2' | 'h3' }
+const { only, headingLevel = 'h2' } = Astro.props;
+const items = only ? WORK.filter((w) => only.includes(w.slug)) : WORK;
+const H = headingLevel;
+---
+<ul class="work-list" role="list">
+  {items.map((w) => (
+    <li class="work-item">
+      <a class="work-shot" href={w.url} target="_blank" rel="noopener" aria-label={`Visit ${w.domain}`}>
+        <img src={`/work/${w.slug}-desktop.webp`} width="1200" height="750" alt={`Home page of the ${w.name} website`} loading="lazy" decoding="async" />
+      </a>
+      <div class="work-body">
+        <H class="work-name">{w.name}</H>
+        <p class="work-meta">{w.kind}, {w.place}. {w.pages}.</p>
+        <p class="work-summary">{w.summary}</p>
+        <ul class="work-built" role="list">
+          {w.built.map((b) => <li>{b}</li>)}
+        </ul>
+        <a class="work-link" href={w.url} target="_blank" rel="noopener">Visit {w.domain}</a>
+      </div>
+    </li>
+  ))}
+</ul>

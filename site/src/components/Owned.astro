@@ -1,0 +1,11 @@
+---
+import { OWNED } from '../data/site';
+---
+<dl class="owned">
+  {OWNED.map((o) => (
+    <div class="owned-row">
+      <dt>{o.what}</dt>
+      <dd>{o.detail}</dd>
+    </div>
+  ))}
+</dl>

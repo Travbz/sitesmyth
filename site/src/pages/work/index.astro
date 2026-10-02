@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import WorkList from '../../components/WorkList.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { WORK } from '../../data/site';
+
+const crumbs = [{ name: 'Portfolio', path: '/work/' }];
+const schema = [
+  {
+    '@type': 'CollectionPage',
+    name: 'Website design portfolio',
+    hasPart: WORK.map((w) => ({ '@type': 'WebSite', name: w.name, url: w.url })),
+  },
+];
+---
+<Base
+  title="Website Design Portfolio: Small Business Sites"
+  description="Live websites built by SiteSmyth for an HVAC contractor, a fire sprinkler company, a taproom, a cleaning business, and a software company."
+  crumbs={crumbs}
+  schema={schema}
+>
+  <header class="page-head wrap">
+    <Crumbs items={crumbs} />
+    <h1>Website design portfolio</h1>
+    <p class="lede">Every site here is live on the owner's own domain, in the owner's own accounts. Click through to any of them.</p>
+  </header>
+  <section class="section section-tight wrap" aria-label="Sites">
+    <WorkList />
+  </section>
+  <CtaBand heading="Want yours on this list?" />
+</Base>

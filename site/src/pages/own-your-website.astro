@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Owned from '../components/Owned.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const crumbs = [{ name: 'Own your website', path: '/own-your-website/' }];
+const faqs = [
+  {
+    q: 'What happens if I stop working with you?',
+    a: 'Nothing changes. The site keeps running on your Cloudflare account, the code stays in your GitHub, and the domain stays in your name.',
+  },
+  {
+    q: 'Do I need to know how to code?',
+    a: 'No. You own the accounts, but you do not have to touch them. When you want changes, you can hire anyone who works with websites, because nothing is locked to us.',
+  },
+  {
+    q: 'Why GitHub and Cloudflare?',
+    a: 'GitHub keeps every version of your site safe and lets anyone you trust make changes. Cloudflare serves the site fast from locations around the world, which helps both customers and search rankings.',
+  },
+];
+const schema = [{ '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }];
+---
+<Base
+  title="Own Your Website: Domain, Code, and Hosting in Your Name"
+  description="Your small business website should belong to you. We build it in your own GitHub and Cloudflare accounts, on a domain registered in your name."
+  crumbs={crumbs}
+  schema={schema}
+>
+  <header class="page-head wrap">
+    <Crumbs items={crumbs} />
+    <h1>Own your website: domain, code, and hosting in your name</h1>
+    <p class="lede">A lot of small businesses find out the hard way that they never owned their website. The builder owned it, or the designer did, and leaving meant starting from zero.</p>
+  </header>
+  <section class="section section-tight wrap own-grid" aria-labelledby="what-h">
+    <div class="section-head">
+      <h2 id="what-h">What you own when the site launches</h2>
+      <p class="lede">Every account is created in your name before the build starts. You add us as a collaborator, we do the work, and you can remove us whenever you like.</p>
+    </div>
+    <Owned />
+  </section>
+  <section class="section wrap narrow" aria-labelledby="faq-h">
+    <div class="section-head"><h2 id="faq-h">Questions about owning your website</h2></div>
+    <Faq faqs={faqs} />
+  </section>
+  <CtaBand />
+</Base>

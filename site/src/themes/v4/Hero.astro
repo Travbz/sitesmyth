@@ -1,0 +1,20 @@
+---
+import WorkViewer from '../../components/WorkViewer';
+import { HOME, WORK } from '../../data/site';
+---
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1>{HOME.h1}</h1>
+      <p class="lede">{HOME.lede}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/contact/">Get a website quote</a>
+        <a class="btn btn-ghost" href="/work/">Full portfolio</a>
+      </div>
+    </div>
+    <div class="hero-work">
+      <h2 class="sr-only">Small business websites we have built</h2>
+      <WorkViewer client:load items={WORK} />
+    </div>
+  </div>
+</section>

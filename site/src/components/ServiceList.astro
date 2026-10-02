@@ -1,0 +1,13 @@
+---
+import { SERVICES } from '../data/site';
+interface Props { exclude?: string }
+const { exclude } = Astro.props;
+---
+<ul class="svc-list" role="list">
+  {SERVICES.filter((s) => s.slug !== exclude).map((s) => (
+    <li class="svc">
+      <h3><a href={`/services/${s.slug}/`}>{s.h1}</a></h3>
+      <p>{s.intro}</p>
+    </li>
+  ))}
+</ul>

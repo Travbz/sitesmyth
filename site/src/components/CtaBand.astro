@@ -1,0 +1,14 @@
+---
+interface Props { heading?: string; text?: string }
+const {
+  heading = 'Tell us about your business',
+  text = 'Send a few details and we will reply with what your site needs and how we would build it.',
+} = Astro.props;
+---
+<section class="cta-band" aria-labelledby="cta-h">
+  <div class="wrap cta-inner">
+    <h2 id="cta-h">{heading}</h2>
+    <p>{text}</p>
+    <a class="btn btn-primary" href="/contact/">Get a website quote</a>
+  </div>
+</section>

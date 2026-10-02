@@ -1,0 +1,10 @@
+---
+import { INDUSTRIES } from '../data/site';
+interface Props { exclude?: string }
+const { exclude } = Astro.props;
+---
+<ul class="ind-list" role="list">
+  {INDUSTRIES.filter((i) => i.slug !== exclude).map((i) => (
+    <li><a href={`/websites-for/${i.slug}/`}>{i.h1}</a></li>
+  ))}
+</ul>

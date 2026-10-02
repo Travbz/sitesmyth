@@ -1,0 +1,23 @@
+---
+interface Props { path: string }
+const { path } = Astro.props;
+const NAV = [
+  { href: '/work/', label: 'Portfolio' },
+  { href: '/services/', label: 'Services' },
+  { href: '/websites-for/', label: 'Industries' },
+  { href: '/own-your-website/', label: 'Own your site' },
+];
+---
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="SiteSmyth home"><slot name="mark" /><span>SiteSmyth</span></a>
+    <nav aria-label="Main">
+      <ul role="list" class="nav">
+        {NAV.map((n) => (
+          <li><a href={n.href} aria-current={path.startsWith(n.href) ? 'page' : undefined}>{n.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <a class="btn btn-primary header-cta" href="/contact/">Get a quote</a>
+  </div>
+</header>

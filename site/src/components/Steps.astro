@@ -1,0 +1,12 @@
+---
+import { STEPS } from '../data/site';
+---
+<ol class="steps" role="list">
+  {STEPS.map((s, i) => (
+    <li class="step">
+      <span class="step-n" aria-hidden="true">{i + 1}</span>
+      <h3>{s.h}</h3>
+      <p>{s.p}</p>
+    </li>
+  ))}
+</ol>

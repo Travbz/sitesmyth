@@ -1,0 +1,30 @@
+---
+import { SERVICES, INDUSTRIES } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <p class="footer-name">SiteSmyth</p>
+      <p>Small business websites, built and handed over.</p>
+      <a class="btn btn-primary" href="/contact/">Get a website quote</a>
+    </div>
+    <nav aria-label="Services">
+      <p class="footer-h">Services</p>
+      <ul role="list">{SERVICES.map((s) => <li><a href={`/services/${s.slug}/`}>{s.nav}</a></li>)}</ul>
+    </nav>
+    <nav aria-label="Industries">
+      <p class="footer-h">Industries</p>
+      <ul role="list">{INDUSTRIES.map((i) => <li><a href={`/websites-for/${i.slug}/`}>{i.short}</a></li>)}</ul>
+    </nav>
+    <nav aria-label="Company">
+      <p class="footer-h">More</p>
+      <ul role="list">
+        <li><a href="/work/">Portfolio</a></li>
+        <li><a href="/own-your-website/">Own your website</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap footer-base"><p>&copy; {year} SiteSmyth</p></div>
+</footer>
