@@ -17,9 +17,18 @@ const crumbs = [{ name: 'Services', path: '/services/' }];
     <p class="lede">Pick the size of site your business needs today. Every one of them is built so it can grow later without starting over.</p>
   </header>
   <section class="section section-tight wrap" aria-label="Services">
-    <ServiceList />
-    <p class="more">Need forms, booking, a gallery, or a menu? See the <a href="/services/website-features/">website features</a> you can add to any of these.</p>
-    <p class="more">Already have a site and want it to stay ranked? See <a href="/monthly-seo-and-ads/">monthly SEO and ad management</a>, a separate monthly service.</p>
+    <ServiceList extra={[
+      {
+        href: '/services/website-features/',
+        h: 'Website features: forms, booking, galleries, and more',
+        p: 'Add only what your business uses: intake forms, online booking, photo galleries, menu pages, chat, and more.',
+      },
+      {
+        href: '/services/monthly-seo-and-ads/',
+        h: 'Monthly SEO and ad management',
+        p: 'Its own monthly contract for businesses that want to stay ranked: Google indexing, local SEO, Google Ads, and Facebook and Instagram ads.',
+      },
+    ]} />
   </section>
   <CtaBand />
 </Base>

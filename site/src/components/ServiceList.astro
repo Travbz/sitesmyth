@@ -1,8 +1,9 @@
 ---
 import { SERVICES } from '../data/site';
 // Full list with summaries lives on /services/ only. Elsewhere, pass compact for plain links.
-interface Props { exclude?: string; compact?: boolean }
-const { exclude, compact } = Astro.props;
+// extra adds hub-only tiles (features, monthly SEO) that are not build services.
+interface Props { exclude?: string; compact?: boolean; extra?: { href: string; h: string; p: string }[] }
+const { exclude, compact, extra = [] } = Astro.props;
 const items = SERVICES.filter((s) => s.slug !== exclude);
 ---
 {compact ? (
@@ -13,6 +14,12 @@ const items = SERVICES.filter((s) => s.slug !== exclude);
       <li class="svc">
         <h2><a href={`/services/${s.slug}/`}>{s.h1}</a></h2>
         <p>{s.description}</p>
+      </li>
+    ))}
+    {extra.map((x) => (
+      <li class="svc">
+        <h2><a href={x.href}>{x.h}</a></h2>
+        <p>{x.p}</p>
       </li>
     ))}
   </ul>
