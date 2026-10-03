@@ -212,8 +212,8 @@ export const ELEMENTS: SiteElement[] = [
     what: 'Customer logins, member areas, and small databases for sites that need to do more than show pages.' },
 ];
 
-// Monthly SEO and ad management: its own service and its own monthly contract, separate from
-// any website build. Feeds /services/monthly-seo-and-ads/.
+// Monthly services, each on its own monthly contract separate from any website build.
+// Grouped into hubs by MONTHLY_GROUPS: /services/monthly-seo/ and /services/ad-management/.
 export const MONTHLY = [
   { slug: 'search-indexing', h2: 'Getting your site indexed on Google and Bing',
     p: 'A new website does not show up in search until the search engines know it exists. We verify your site in Google Search Console and Bing Webmaster Tools, submit your sitemap to both, link the site to your Google Business Profile, and check that every page gets indexed.' },
@@ -372,6 +372,29 @@ export const MONTHLY_PAGES: Record<string, DetailPage> = {
   },
 };
 
+export const MONTHLY_GROUPS: Record<string, {
+  nav: string; title: string; h1: string; description: string; lede: string; items: string[]; cta: string;
+}> = {
+  'monthly-seo': {
+    nav: 'Monthly SEO',
+    title: 'Monthly SEO Services for Small Businesses',
+    h1: 'Monthly SEO services for small businesses',
+    description: 'Get indexed on Google and Bing, then stay ranked with ongoing local SEO, on its own monthly contract separate from any website build.',
+    lede: 'For businesses that want to get ranked and stay ranked. This is its own monthly contract, separate from any website build, so you can sign up without one.',
+    items: ['search-indexing', 'local-seo'],
+    cta: 'Ask about monthly SEO',
+  },
+  'ad-management': {
+    nav: 'Ad management',
+    title: 'Google and Facebook Ad Management for Small Businesses',
+    h1: 'Ad management for small businesses: Google, Facebook, and Instagram',
+    description: 'We manage your Google Ads and your Facebook and Instagram ads every month. We do not create the ads: you bring them, and we run them.',
+    lede: 'You bring the ads, and we run them every month, on a monthly contract separate from any website build. Ad spend is paid to Google or Meta directly, separate from our management fee.',
+    items: ['google-ads', 'meta-ads'],
+    cta: 'Ask about ad management',
+  },
+};
+
 export const STEPS = [
   { h: 'Tell us about the business', p: 'What you do, who you do it for, and where. Send photos of your work if you have them.' },
   { h: 'You set up your accounts', p: 'A GitHub account, a Cloudflare account, and your domain, all in your name. We walk you through it and you add us as a collaborator.' },
@@ -394,10 +417,12 @@ export const HOME = {
   body: [
     'Some businesses need one clean page that says what they do and how to reach them. Others need a page for each service, each town they drive to, or each item on the menu, so customers searching for any of those find them. We build both, fast and ready for search.',
     'Before any work starts, you open your own accounts and add us to them. We build the site inside those accounts. When the job is paid, there is nothing to transfer, because it was yours the whole time.',
+    'Once the site is live, we can keep the marketing going too: monthly SEO, ad management, and AI search optimization, each on its own monthly contract.',
   ],
   explore: [
     { href: '/work/', label: 'See the sites we have built' },
     { href: '/services/', label: 'What we build' },
+    { href: '/services/#ongoing-marketing', label: 'Ongoing marketing' },
     { href: '/own-your-website/', label: 'How the handoff works' },
   ],
 };

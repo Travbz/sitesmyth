@@ -8,7 +8,8 @@ const crumbs = [
 ];
 const siblings = [
   ...SERVICES.map((s) => ({ href: `/services/${s.slug}/`, label: s.title })),
-  { href: '/services/monthly-seo-and-ads/', label: 'Monthly SEO and ad management' },
+  { href: '/services/monthly-seo/', label: 'Monthly SEO services' },
+  { href: '/services/ad-management/', label: 'Ad management: Google, Facebook, and Instagram' },
 ];
 ---
 <DetailPage page={AI_SEARCH_PAGE} crumbs={crumbs} siblings={siblings} siblingsHeading="Other services" cta={{ href: '/contact/', label: 'Ask about AI search optimization' }} />

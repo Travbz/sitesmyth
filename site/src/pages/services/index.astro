@@ -5,40 +5,59 @@ import ServiceList from '../../components/ServiceList.astro';
 import CtaBand from '../../components/CtaBand.astro';
 
 const crumbs = [{ name: 'Services', path: '/services/' }];
+// Two kinds of work: one-time website builds, and ongoing marketing on monthly contracts.
+const ongoing = [
+  {
+    href: '/services/monthly-seo/',
+    h: 'Monthly SEO',
+    p: 'Get indexed on Google and Bing, then stay ranked with ongoing local SEO.',
+  },
+  {
+    href: '/services/ad-management/',
+    h: 'Ad management: Google, Facebook, and Instagram',
+    p: 'You bring the ads, and we run them every month: targeting, budgets, and tracking.',
+  },
+  {
+    href: '/services/ai-search-optimization/',
+    h: 'AI search optimization (AEO and GEO)',
+    p: 'Build your authority with ChatGPT, Google AI Overviews, and Copilot, so when someone asks which business to use, yours gets cited.',
+  },
+  {
+    href: '/services/google-reviews-respondyr/',
+    h: 'Google reviews and map rankings with Respondyr',
+    p: 'Our sister company Respondyr answers every Google review in your voice and helps you climb the map. Recommended for every local business.',
+  },
+];
 ---
 <Base
   title="Website Design Services for Small Businesses"
-  description="Landing pages, full multi-page websites, local SEO city pages, and redesigns off Wix, GoDaddy, or WordPress. Every site handed over to you."
+  description="One-time website builds: landing pages, full websites, local SEO pages, and redesigns, handed over to you. Plus ongoing SEO, ad management, and AI search on monthly contracts."
   crumbs={crumbs}
 >
   <header class="page-head wrap">
     <Crumbs items={crumbs} />
     <h1>Website design services for small businesses</h1>
-    <p class="lede">Pick the size of site your business needs today. Every one of them is built so it can grow later without starting over.</p>
+    <p class="lede">Most of what we do is build websites: one project, paid once, and the site is yours. If you want help after launch, our ongoing marketing runs on its own monthly contracts.</p>
   </header>
-  <section class="section section-tight wrap" aria-label="Services">
-    <ServiceList extra={[
+  <section class="section section-tight wrap" aria-labelledby="design-h">
+    <div class="section-head">
+      <h2 id="design-h">Website design</h2>
+      <p class="lede">One-time projects. Pick the size of site your business needs today; every one is built to grow later without starting over.</p>
+    </div>
+    <ServiceList level="h3" extra={[
       {
         href: '/services/website-features/',
         h: 'Website features: forms, booking, galleries, and more',
         p: 'Add only what your business uses: intake forms, online booking, photo galleries, menu pages, chat, and more.',
       },
-      {
-        href: '/services/monthly-seo-and-ads/',
-        h: 'Monthly SEO and ad management',
-        p: 'Its own monthly contract for businesses that want to stay ranked: Google and Bing indexing, local SEO, Google Ads, and Facebook and Instagram ads.',
-      },
-      {
-        href: '/services/ai-search-optimization/',
-        h: 'AI search optimization (AEO and GEO)',
-        p: 'Build your authority with ChatGPT, Google AI Overviews, and Copilot, so when someone asks which business to use, yours gets cited. Its own service, separate from SEO.',
-      },
-      {
-        href: '/services/google-reviews-respondyr/',
-        h: 'Google reviews and map rankings with Respondyr',
-        p: 'Our sister company Respondyr answers every Google review in your voice and helps you climb the map. Recommended for every local business.',
-      },
     ]} />
+  </section>
+  <section class="section wrap" id="ongoing-marketing" aria-labelledby="ongoing-h">
+    <div class="section-head">
+      <h2 id="ongoing-h">Ongoing marketing</h2>
+      <p class="lede">Monthly services, each on its own contract and separate from any website build. You can sign up for them without a site from us.</p>
+    </div>
+    <ServiceList level="h3" only={ongoing} />
   </section>
   <CtaBand />
 </Base>

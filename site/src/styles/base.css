@@ -126,7 +126,7 @@ ul, ol { margin: 0; padding: 0; }
 .link-list { list-style: none; display: grid; gap: .75rem; }
 .link-list a { font-weight: 600; }
 
-.svc h2 { font-size: 1.4rem; line-height: 1.15; }
+.svc :is(h2, h3) { font-size: 1.4rem; line-height: 1.15; }
 .shot { display: grid; gap: .75rem; justify-items: start; }
 .shot .viewer-frame.phone { width: min(100%, 260px); }
 .work-item { scroll-margin-top: 5rem; }
@@ -144,10 +144,10 @@ ul, ol { margin: 0; padding: 0; }
 .detail-body { display: grid; gap: 2.25rem; }
 .detail-sec h2 { font-size: clamp(1.35rem, 2.6vw, 1.75rem); margin-bottom: .6rem; }
 .detail-sec p { max-width: 65ch; }
-.feature-list .svc h3 a, .feature-list .svc h2 a { text-decoration: none; }
-.feature-list .svc h3 a:hover, .feature-list .svc h2 a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.feature-list .svc h3 a, .feature-list .svc :is(h2, h3) a { text-decoration: none; }
+.feature-list .svc h3 a:hover, .feature-list .svc :is(h2, h3) a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
 /* Whole tile is clickable: the heading link stretches over its tile. */
 .svc { position: relative; }
-.svc h2 a::after, .svc h3 a::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+.svc :is(h2, h3) a::after, .svc h3 a::after { content: ''; position: absolute; inset: 0; z-index: 1; }
 .svc:has(h2 a, h3 a) { cursor: pointer; }

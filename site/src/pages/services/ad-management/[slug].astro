@@ -1,0 +1,23 @@
+---
+import DetailPage from '../../../components/DetailPage.astro';
+import { MONTHLY, MONTHLY_GROUPS, MONTHLY_PAGES } from '../../../data/site';
+
+const GROUP = 'ad-management';
+export function getStaticPaths() {
+  return MONTHLY_GROUPS['ad-management'].items.filter((s) => MONTHLY_PAGES[s]).map((slug) => ({ params: { slug } }));
+}
+const { slug } = Astro.params as { slug: string };
+const g = MONTHLY_GROUPS[GROUP];
+const item = MONTHLY.find((m) => m.slug === slug)!;
+const crumbs = [
+  { name: 'Services', path: '/services/' },
+  { name: g.nav, path: `/services/${GROUP}/` },
+  { name: item.h2, path: `/services/${GROUP}/${slug}/` },
+];
+const siblings = [
+  ...g.items.filter((s) => s !== slug && MONTHLY_PAGES[s]).map((s) => ({ href: `/services/${GROUP}/${s}/`, label: MONTHLY_PAGES[s].h1 })),
+  ...Object.keys(MONTHLY_GROUPS).filter((k) => k !== GROUP).map((k) => ({ href: `/services/${k}/`, label: MONTHLY_GROUPS[k].h1 })),
+  { href: '/services/ai-search-optimization/', label: 'AI search optimization (AEO and GEO)' },
+];
+---
+<DetailPage page={MONTHLY_PAGES[slug]} crumbs={crumbs} siblings={siblings} siblingsHeading="More ongoing marketing" cta={{ href: '/contact/', label: g.cta }} />

@@ -1,0 +1,35 @@
+---
+// Hub page for one monthly service group (monthly SEO, ad management).
+import Base from '../layouts/Base.astro';
+import Crumbs from './Crumbs.astro';
+import CtaBand from './CtaBand.astro';
+import { MONTHLY, MONTHLY_GROUPS, MONTHLY_PAGES, SITE } from '../data/site';
+
+interface Props { group: string }
+const g = MONTHLY_GROUPS[Astro.props.group];
+const base = `/services/${Astro.props.group}/`;
+const items = g.items.map((slug) => MONTHLY.find((m) => m.slug === slug)!);
+const crumbs = [{ name: 'Services', path: '/services/' }, { name: g.nav, path: base }];
+const schema = [{
+  '@type': 'Service', name: g.h1, description: g.description, provider: { '@id': `${SITE.url}/#org` },
+  hasOfferCatalog: { '@type': 'OfferCatalog', name: g.nav, itemListElement: items.map((m) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: m.h2, description: m.p } })) },
+}];
+---
+<Base title={g.title} description={g.description} crumbs={crumbs} schema={schema}>
+  <header class="page-head wrap">
+    <Crumbs items={crumbs} />
+    <h1>{g.h1}</h1>
+    <p class="lede">{g.lede}</p>
+  </header>
+  <section class="section section-tight wrap" aria-label={g.nav}>
+    <ul class="svc-list feature-list" role="list">
+      {items.map((m) => (
+        <li class="svc" id={m.slug}>
+          <h2>{MONTHLY_PAGES[m.slug] ? <a href={`${base}${m.slug}/`}>{m.h2}</a> : m.h2}</h2>
+          <p>{m.p}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <CtaBand heading={g.cta} text="Tell us about your business and what you want from it, and we will reply with what we would do each month." />
+</Base>

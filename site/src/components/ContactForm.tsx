@@ -99,7 +99,8 @@ export default function ContactForm() {
             <option>A full website with service or menu pages</option>
             <option>Pages for the towns I serve</option>
             <option>A redesign of my current site</option>
-            <option>Monthly SEO or ads for my business</option>
+            <option>Monthly SEO</option>
+            <option>Ad management (Google, Facebook, Instagram)</option>
             <option>AI search optimization</option>
             <option>A one-off Google Business Profile and reviews consult</option>
           </select>
