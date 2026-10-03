@@ -223,8 +223,6 @@ export const MONTHLY = [
     p: 'Search ads for the services and towns you want more work in, set up and adjusted every month, with tracking that shows which ads turn into leads.' },
   { slug: 'meta-ads', h2: 'Facebook and Instagram ads',
     p: 'Meta ads shown to people in your service area, run and adjusted every month.' },
-  { slug: 'ai-search', h2: 'AI search optimization (AEO and GEO)',
-    p: 'Make your business easy for ChatGPT, Google AI Overviews, and Copilot to understand and cite, as its own job separate from traditional SEO.' },
 ];
 
 // One page per searchable feature and per monthly service. Copy states only what the
@@ -319,6 +317,18 @@ export const RESPONDYR_PAGE: DetailPage = {
   ],
 };
 
+// AI search optimization is its own service, separate from monthly SEO and ads (Travis ruling).
+export const AI_SEARCH_PAGE: DetailPage = {
+  title: 'AI Search Optimization (AEO and GEO) for Small Businesses',
+  h1: 'AI search optimization (AEO and GEO) for small businesses',
+  description: 'Help AI search tools like ChatGPT, Google AI Overviews, and Copilot understand and cite your business. Its own service, separate from traditional SEO.',
+  sections: [
+    { h2: 'Search is not just a list of links anymore', p: 'More people ask an AI tool for a recommendation instead of scrolling results. Those tools answer from what they can read and trust about your business.' },
+    { h2: 'What the work covers', p: 'Structured data that spells out your services and service area, pages written so each section answers one question on its own, a plain-text summary of the business for AI crawlers, and business details that match everywhere they appear online.' },
+    { h2: 'How it differs from SEO', p: 'Traditional SEO aims for a ranking position. AI search work aims to make yours the business an AI tool names when someone asks. The two overlap, and we treat them as separate jobs.' },
+  ],
+};
+
 export const MONTHLY_PAGES: Record<string, DetailPage> = {
   'search-indexing': {
     title: 'Get Your Website Indexed on Google and Bing',
@@ -358,16 +368,6 @@ export const MONTHLY_PAGES: Record<string, DetailPage> = {
       { h2: 'Reach people before they search', p: 'Search ads catch people who are already looking. Facebook and Instagram ads reach people in your area before they need you, so yours is the name they remember when they do.' },
       { h2: 'Managed every month', p: 'We set up campaigns aimed at your service area and adjust them every month based on results.' },
       { h2: 'Ad spend', p: 'Ad spend is paid to Meta directly, separate from the management fee.' },
-    ],
-  },
-  'ai-search': {
-    title: 'AI Search Optimization (AEO and GEO) for Small Businesses',
-    h1: 'AI search optimization (AEO and GEO) for small businesses',
-    description: 'Help AI search tools like ChatGPT, Google AI Overviews, and Copilot understand and cite your business, as its own job separate from traditional SEO.',
-    sections: [
-      { h2: 'Search is not just a list of links anymore', p: 'More people ask an AI tool for a recommendation instead of scrolling results. Those tools answer from what they can read and trust about your business.' },
-      { h2: 'What the work covers', p: 'Structured data that spells out your services and service area, pages written so each section answers one question on its own, a plain-text summary of the business for AI crawlers, and business details that match everywhere they appear online.' },
-      { h2: 'How it differs from SEO', p: 'Traditional SEO aims for a ranking position. AI search work aims to make yours the business an AI tool names when someone asks. The two overlap, and we treat them as separate jobs.' },
     ],
   },
 };
