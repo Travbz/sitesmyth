@@ -27,10 +27,11 @@ wheels/
 # Generated sites (staging before R2 upload)
 output/
 
-# Node (Stitch SDK installed at runtime)
+# Node (Stitch SDK installed at runtime). Anchored to the repo root so the
+# site's own manifests in site/ stay tracked and the site builds from a clone.
 node_modules/
-package.json
-package-lock.json
+/package.json
+/package-lock.json
 
 # Stitch temp files (generated during builds)
 _stitch_gen.mjs

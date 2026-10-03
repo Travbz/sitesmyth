@@ -4,7 +4,7 @@ import '@theme/fonts.ts';
 import '@theme/theme.css';
 import Header from '@theme/Header.astro';
 import Footer from '@theme/Footer.astro';
-import { SITE } from '../data/site';
+import { SITE, WORK } from '../data/site';
 
 interface Props {
   title: string;
@@ -18,6 +18,9 @@ const canonical = new URL(Astro.url.pathname, SITE.url).href;
 const fullTitle = title.includes(SITE.name) ? title : `${title} | ${SITE.name}`;
 // Design previews stay out of search. Only the production build is indexable.
 const indexable = process.env.PROD === '1';
+// The share preview follows whatever sits first in the portfolio, so it never
+// goes stale against a reorder.
+const ogImage = new URL(`/work/${WORK[0].slug}-desktop.webp`, SITE.url).href;
 
 const graph = [
   {
@@ -57,7 +60,7 @@ const graph = [
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL('/work/loos-and-sons-desktop.webp', SITE.url).href} />
+    <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
