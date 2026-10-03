@@ -215,6 +215,18 @@ export const ELEMENTS: SiteElement[] = [
     what: 'Customer logins, member areas, and small databases for sites that need to do more than show pages.' },
 ];
 
+// Monthly services, billed separately from the website build. Feeds /services/monthly-marketing/.
+export const MONTHLY = [
+  { slug: 'google-indexing', h2: 'Getting your site indexed on Google',
+    p: 'A new website does not show up in search until Google knows it exists. We verify your site in Google Search Console, submit your sitemap, link the site to your Google Business Profile, and check that every page gets indexed.' },
+  { slug: 'local-seo', h2: 'Ongoing local SEO',
+    p: 'Each month we look at which searches bring people to your site, fix what keeps pages from showing up, and add pages for the searches you are missing.' },
+  { slug: 'google-ads', h2: 'Google Ads management',
+    p: 'Search ads for the services and towns you want more work in, set up and adjusted every month, with tracking that shows which ads turn into leads.' },
+  { slug: 'meta-ads', h2: 'Facebook and Instagram ads',
+    p: 'Meta ads shown to people in your service area, run and adjusted every month.' },
+];
+
 export const STEPS = [
   { h: 'Tell us about the business', p: 'What you do, who you do it for, and where. Send photos of your work if you have them.' },
   { h: 'You set up your accounts', p: 'A GitHub account, a Cloudflare account, and your domain, all in your name. We walk you through it and you add us as a collaborator.' },

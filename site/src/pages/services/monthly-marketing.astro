@@ -1,0 +1,48 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import ServiceList from '../../components/ServiceList.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { MONTHLY, SITE } from '../../data/site';
+
+const crumbs = [{ name: 'Services', path: '/services/' }, { name: 'Monthly marketing', path: '/services/monthly-marketing/' }];
+const schema = [
+  {
+    '@type': 'Service',
+    name: 'Monthly SEO and ad management for small businesses',
+    provider: { '@id': `${SITE.url}/#org` },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Monthly marketing services',
+      itemListElement: MONTHLY.map((m) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: m.h2, description: m.p } })),
+    },
+  },
+];
+---
+<Base
+  title="Monthly SEO and Ad Management for Small Businesses"
+  description="Get your website indexed on Google, then keep it climbing: ongoing local SEO, Google Ads, and Facebook and Instagram ads, billed monthly."
+  crumbs={crumbs}
+  schema={schema}
+>
+  <header class="page-head wrap">
+    <Crumbs items={crumbs} />
+    <h1>Monthly SEO and ad management for small businesses</h1>
+    <p class="lede">A new website only works once people find it. These services are billed monthly, separate from the website build, and you pick the ones your business needs.</p>
+  </header>
+  <section class="section section-tight wrap" aria-label="Monthly services">
+    <ul class="svc-list feature-list" role="list">
+      {MONTHLY.map((m) => (
+        <li class="svc" id={m.slug}>
+          <h2>{m.h2}</h2>
+          <p>{m.p}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <section class="section wrap" aria-labelledby="build-h">
+    <div class="section-head"><h2 id="build-h">Website services</h2></div>
+    <ServiceList compact />
+  </section>
+  <CtaBand heading="Ask about monthly marketing" />
+</Base>

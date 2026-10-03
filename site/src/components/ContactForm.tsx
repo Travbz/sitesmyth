@@ -99,6 +99,7 @@ export default function ContactForm() {
             <option>A full website with service or menu pages</option>
             <option>Pages for the towns I serve</option>
             <option>A redesign of my current site</option>
+            <option>Monthly SEO or ads for my business</option>
           </select>
         </div>
         <div class="field">
