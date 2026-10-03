@@ -42,7 +42,6 @@ export type Service = {
   intro: string;
   forWho: string;
   includes: string[];
-  examples: string[]; // WORK slugs
   faqs: { q: string; a: string }[];
 };
 
@@ -65,7 +64,6 @@ export const SERVICES: Service[] = [
       'A contact form or click-to-call, whichever your customers use',
       'Your domain connected to your own Cloudflare account',
     ],
-    examples: ['v-sandoval'],
     faqs: [
       {
         q: 'Is one page enough to show up on Google?',
@@ -99,7 +97,6 @@ export const SERVICES: Service[] = [
       'Structured data on every page so search engines read it correctly',
       'A sitemap, clean URLs, and fast load times on every page',
     ],
-    examples: ['loos-and-sons', 'elevation-fire', 'tipsy-trout'],
     faqs: [
       {
         q: 'How many pages do I need?',
@@ -132,7 +129,6 @@ export const SERVICES: Service[] = [
       'Internal links between services and towns so search engines see the full picture',
       'Schema that tells Google your service area',
     ],
-    examples: ['loos-and-sons', 'elevation-fire'],
     faqs: [
       {
         q: 'Why not use one template and swap the town name?',
@@ -161,7 +157,6 @@ export const SERVICES: Service[] = [
       'Your domain moved to your own Cloudflare account, with email records kept intact',
       'Redirects from old URLs so you keep what you have earned in search',
     ],
-    examples: ['loos-and-sons', 'elevation-fire'],
     faqs: [
       {
         q: 'Will my email stop working when the domain moves?',
@@ -252,7 +247,7 @@ export const FEATURE_PAGES: Record<string, DetailPage> = {
     h1: 'Online booking for small business websites',
     description: 'Let customers book a visit from your website through the scheduling software you already use, like Housecall Pro, with a book button on every page.',
     sections: [
-      { h2: 'Book from any page', p: 'A Book online button sits in the header and in the sticky bar on phones, so a customer who is ready never has to hunt for it. On the Loos & Sons HVAC site it opens their Housecall Pro booking page, and customers enroll in the maintenance plan the same way.' },
+      { h2: 'Book from any page', p: 'A Book online button sits in the header and in the sticky bar on phones, so a customer who is ready never has to hunt for it. It opens your booking page, and maintenance plan signups can work the same way.' },
       { h2: 'Uses the software you already have', p: 'Booking runs inside your scheduling software, so appointments land on the same calendar your team already works from. We connect the site to it; we do not replace it.' },
       { h2: 'What it costs to run', p: 'Your scheduling software charges its own monthly fee. The website side adds nothing.' },
     ],
@@ -262,7 +257,7 @@ export const FEATURE_PAGES: Record<string, DetailPage> = {
     h1: 'Photo galleries for small business websites',
     description: 'Show your real work in a photo gallery sorted into categories customers can filter. Your own job photos, not stock.',
     sections: [
-      { h2: 'Your work, sorted', p: 'Customers want to see jobs like theirs. A filterable gallery lets them tap a category and see only that kind of work. The Loos & Sons HVAC gallery holds 43 job photos with filters for AC, ductless, furnaces, boilers and radiant, geothermal, water heaters, and service.' },
+      { h2: 'Your work, sorted', p: 'Customers want to see jobs like theirs. A filterable gallery lets them tap a category, like furnaces or water heaters, and see only that kind of work.' },
       { h2: 'Built to stay fast', p: 'Every photo is sized and compressed for the web, so a large gallery does not slow the rest of the site down.' },
       { h2: 'What it costs to run', p: 'Nothing extra. The gallery is part of the site.' },
     ],
@@ -273,7 +268,7 @@ export const FEATURE_PAGES: Record<string, DetailPage> = {
     description: 'Menu pages with every dish and price as real text, menu markup search engines can read, and a page of its own for each signature item.',
     sections: [
       { h2: 'Real text, not a PDF', p: 'A menu posted as a photo or a PDF is hard to read on a phone and invisible to search. A typed menu page loads fast, reads well on any screen, and lets search engines see what you serve and what it costs.' },
-      { h2: 'A page for each signature dish', p: 'On The Tipsy Trout Taproom site, each of the six El Pollo dishes has its own page, so someone searching for a dish can land right on it. The menu shows cash and card prices side by side.' },
+      { h2: 'A page for each signature dish', p: 'Each signature dish can have its own page, so someone searching for that dish lands right on it. Cash and card prices can sit side by side.' },
       { h2: 'Menu markup', p: 'Menu, section, and item markup gives search engines the names and prices on the page in a form they read directly.' },
       { h2: 'What it costs to run', p: 'Nothing extra. Menu pages are part of the site.' },
     ],
@@ -283,7 +278,7 @@ export const FEATURE_PAGES: Record<string, DetailPage> = {
     h1: 'Chat and text widgets for small business websites',
     description: 'A chat bubble that lets visitors text your business from any page of your website, through the messaging tool you already use.',
     sections: [
-      { h2: 'Text from any page', p: 'Plenty of customers would rather text than call. A chat bubble on every page lets them send a message without leaving the site. Loos & Sons HVAC runs a Podium widget across their whole site.' },
+      { h2: 'Text from any page', p: 'Plenty of customers would rather text than call. A chat bubble on every page lets them send a message without leaving the site.' },
       { h2: 'Messages land where you already work', p: 'Messages go into the messaging tool you already pay for, so your team answers them the same way it answers every other text.' },
       { h2: 'What it costs to run', p: 'The messaging tool charges its own monthly fee. The website side adds nothing.' },
     ],

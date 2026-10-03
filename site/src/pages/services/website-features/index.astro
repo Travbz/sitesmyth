@@ -3,10 +3,9 @@ import Base from '../../../layouts/Base.astro';
 import Crumbs from '../../../components/Crumbs.astro';
 import ServiceList from '../../../components/ServiceList.astro';
 import CtaBand from '../../../components/CtaBand.astro';
-import { ELEMENTS, WORK, SITE, FEATURE_PAGES } from '../../../data/site';
+import { ELEMENTS, SITE, FEATURE_PAGES } from '../../../data/site';
 
 const crumbs = [{ name: 'Services', path: '/services/' }, { name: 'Website features', path: '/services/website-features/' }];
-const name = (slug: string) => WORK.find((w) => w.slug === slug)?.name ?? slug;
 const groups = [
   {
     id: 'free',
@@ -41,7 +40,7 @@ const schema = [
   <header class="page-head wrap">
     <Crumbs items={crumbs} />
     <h1>Website features for small businesses: forms, booking, galleries, and more</h1>
-    <p class="lede">Every site starts with the pages your customers search for. Then you add only the pieces your business uses. Most of these are already running on sites in our portfolio.</p>
+    <p class="lede">Every site starts with the pages your customers search for. Then you add only the pieces your business uses. Pick the ones that fit how you work.</p>
   </header>
   {groups.map((g) => (
     <section class="section section-tight wrap" aria-labelledby={`${g.id}-h`}>
@@ -54,11 +53,6 @@ const schema = [
           <li class="svc" id={e.slug}>
             <h3>{FEATURE_PAGES[e.slug] ? <a href={`/services/website-features/${e.slug}/`}>{e.name}</a> : e.name}</h3>
             <p>{e.what}</p>
-            {e.proof.length > 0 && (
-              <p class="seen-on">See it on {e.proof.map((p, i) => (
-                <>{i > 0 && (i === e.proof.length - 1 ? ' and ' : ', ')}<a href={`/work/#${p}`}>{name(p)}</a></>
-              ))}</p>
-            )}
           </li>
         ))}
       </ul>

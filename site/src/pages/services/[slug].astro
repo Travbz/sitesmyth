@@ -1,7 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
-import WorkLinks from '../../components/WorkLinks.astro';
 import ServiceList from '../../components/ServiceList.astro';
 import Faq from '../../components/Faq.astro';
 import CtaBand from '../../components/CtaBand.astro';
@@ -30,10 +29,6 @@ const schema = [
       <p class="for-who"><strong>A good fit for:</strong> {s.forWho}</p>
     </div>
     <ul class="checklist" role="list">{s.includes.map((i) => <li>{i}</li>)}</ul>
-  </section>
-  <section class="section wrap" aria-labelledby="ex-h" data-work-group>
-    <div class="section-head"><h2 id="ex-h">{s.nav} we have built</h2></div>
-    <WorkLinks only={s.examples} />
   </section>
   <section class="section wrap narrow" aria-labelledby="faq-h">
     <div class="section-head"><h2 id="faq-h">Questions about {s.nav.toLowerCase()}</h2></div>
