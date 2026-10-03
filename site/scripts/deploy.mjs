@@ -16,7 +16,10 @@ for (const v of process.argv.slice(2)) {
     account_id: ACCOUNT,
     workers_dev: false,
     assets: { directory: `dist/${v}`, binding: 'ASSETS', not_found_handling: '404-page', run_worker_first: ['/api/*'] }, // code runs only for the form; pages are free static assets
-    kv_namespaces: [{ binding: 'LEADS', id: KV }],
+    // One namespace, two bindings: leads under lead:*, portfolio availability under work-status.
+    kv_namespaces: [{ binding: 'LEADS', id: KV }, { binding: 'STATUS', id: KV }],
+    // Production checks every portfolio site hourly. Previews must not probe client sites.
+    ...(prod ? { triggers: { crons: ['0 * * * *'] } } : {}),
     routes: prod
       ? [
           { pattern: 'sitesmyth.com/*', zone_name: 'sitesmyth.com' },
