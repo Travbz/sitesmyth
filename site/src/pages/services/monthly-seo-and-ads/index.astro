@@ -1,8 +1,8 @@
 ---
-import Base from '../../layouts/Base.astro';
-import Crumbs from '../../components/Crumbs.astro';
-import CtaBand from '../../components/CtaBand.astro';
-import { MONTHLY, SITE } from '../../data/site';
+import Base from '../../../layouts/Base.astro';
+import Crumbs from '../../../components/Crumbs.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import { MONTHLY, SITE, MONTHLY_PAGES } from '../../../data/site';
 
 const crumbs = [{ name: 'Services', path: '/services/' }, { name: 'Monthly SEO and ads', path: '/services/monthly-seo-and-ads/' }];
 const schema = [
@@ -20,7 +20,7 @@ const schema = [
 ---
 <Base
   title="Monthly SEO and Ad Management for Small Businesses"
-  description="Monthly SEO and ad management for small businesses that want to stay ranked: Google and Bing indexing, ongoing local SEO, Google Ads, and Facebook and Instagram ads, on its own monthly contract."
+  description="Monthly SEO and ad management for small businesses that want to stay ranked: Google and Bing indexing, ongoing local SEO, AI search optimization, Google Ads, and Facebook and Instagram ads, on its own monthly contract."
   crumbs={crumbs}
   schema={schema}
 >
@@ -33,7 +33,7 @@ const schema = [
     <ul class="svc-list feature-list" role="list">
       {MONTHLY.map((m) => (
         <li class="svc" id={m.slug}>
-          <h2>{m.h2}</h2>
+          <h2>{MONTHLY_PAGES[m.slug] ? <a href={`/services/monthly-seo-and-ads/${m.slug}/`}>{m.h2}</a> : m.h2}</h2>
           <p>{m.p}</p>
         </li>
       ))}

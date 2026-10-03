@@ -1,5 +1,5 @@
 ---
-import { WORK, ELEMENTS } from '../data/site';
+import { WORK, ELEMENTS, FEATURE_PAGES } from '../data/site';
 import ShotToggle from './ShotToggle';
 import WorkStatus from './WorkStatus.astro';
 interface Props { only?: string[]; headingLevel?: 'h2' | 'h3' }
@@ -21,7 +21,7 @@ const H = headingLevel;
         {ELEMENTS.some((e) => e.proof.includes(w.slug)) && (
           <ul class="feature-tags" role="list" aria-label={`Features on ${w.domain}`}>
             {ELEMENTS.filter((e) => e.proof.includes(w.slug)).map((e) => (
-              <li><a href={`/services/website-features/#${e.slug}`}>{e.name}</a></li>
+              <li><a href={FEATURE_PAGES[e.slug] ? `/services/website-features/${e.slug}/` : `/services/website-features/#${e.slug}`}>{e.name}</a></li>
             ))}
           </ul>
         )}

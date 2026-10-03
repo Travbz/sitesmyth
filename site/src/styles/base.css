@@ -144,3 +144,10 @@ ul, ol { margin: 0; padding: 0; }
   border: 1px solid var(--line-strong, var(--line)); color: var(--fg);
 }
 .feature-tags a:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Feature and monthly service detail pages */
+.detail-body { display: grid; gap: 2.25rem; }
+.detail-sec h2 { font-size: clamp(1.35rem, 2.6vw, 1.75rem); margin-bottom: .6rem; }
+.detail-sec p { max-width: 65ch; }
+.feature-list .svc h3 a, .feature-list .svc h2 a { text-decoration: none; }
+.feature-list .svc h3 a:hover, .feature-list .svc h2 a:hover { text-decoration: underline; text-underline-offset: 4px; }

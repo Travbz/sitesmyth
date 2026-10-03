@@ -1,0 +1,21 @@
+---
+import DetailPage from '../../../components/DetailPage.astro';
+import { ELEMENTS, FEATURE_PAGES } from '../../../data/site';
+
+export function getStaticPaths() {
+  return Object.keys(FEATURE_PAGES).map((slug) => ({ params: { slug } }));
+}
+const { slug } = Astro.params as { slug: string };
+const page = FEATURE_PAGES[slug];
+const el = ELEMENTS.find((e) => e.slug === slug)!;
+const crumbs = [
+  { name: 'Services', path: '/services/' },
+  { name: 'Website features', path: '/services/website-features/' },
+  { name: el.name, path: `/services/website-features/${slug}/` },
+];
+const siblings = [
+  ...Object.keys(FEATURE_PAGES).filter((s) => s !== slug).map((s) => ({ href: `/services/website-features/${s}/`, label: FEATURE_PAGES[s].h1 })),
+  { href: '/services/website-features/', label: 'All website features' },
+];
+---
+<DetailPage page={page} crumbs={crumbs} proof={el.proof} siblings={siblings} siblingsHeading="More website features" />

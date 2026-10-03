@@ -1,0 +1,49 @@
+---
+// One page for a single feature or monthly service: search-term H1, short sections,
+// optional portfolio proof, then links to its siblings.
+import Base from '../layouts/Base.astro';
+import Crumbs from './Crumbs.astro';
+import CtaBand from './CtaBand.astro';
+import { SITE, WORK, type DetailPage } from '../data/site';
+
+interface Props {
+  page: DetailPage;
+  crumbs: { name: string; path: string }[];
+  proof?: string[];
+  siblings: { href: string; label: string }[];
+  siblingsHeading: string;
+  cta?: { href: string; label: string };
+}
+const { page, crumbs, proof = [], siblings, siblingsHeading, cta = { href: '/contact/', label: 'Get a website quote' } } = Astro.props;
+const proofSites = WORK.filter((w) => proof.includes(w.slug));
+const schema = [{ '@type': 'Service', name: page.h1, description: page.description, provider: { '@id': `${SITE.url}/#org` } }];
+---
+<Base title={page.title} description={page.description} crumbs={crumbs} schema={schema}>
+  <header class="page-head wrap">
+    <Crumbs items={crumbs} />
+    <h1>{page.h1}</h1>
+    <p class="lede">{page.description}</p>
+    <a class="btn btn-primary head-cta" href={cta.href} {...(cta.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>{cta.label}</a>
+  </header>
+  <section class="section section-tight wrap detail-body" aria-label="Details">
+    {page.sections.map((x) => (
+      <div class="detail-sec">
+        <h2>{x.h2}</h2>
+        <p>{x.p}</p>
+      </div>
+    ))}
+  </section>
+  {proofSites.length > 0 && (
+    <section class="section wrap" aria-labelledby="proof-h">
+      <div class="section-head"><h2 id="proof-h">See it on a live site</h2></div>
+      <ul class="link-list" role="list">
+        {proofSites.map((w) => <li><a href={`/work/#${w.slug}`}>{w.name}</a> <span class="seen-on">{w.kind}, {w.place}</span></li>)}
+      </ul>
+    </section>
+  )}
+  <section class="section wrap" aria-labelledby="sib-h">
+    <div class="section-head"><h2 id="sib-h">{siblingsHeading}</h2></div>
+    <ul class="link-list" role="list">{siblings.map((x) => <li><a href={x.href}>{x.label}</a></li>)}</ul>
+  </section>
+  <CtaBand />
+</Base>

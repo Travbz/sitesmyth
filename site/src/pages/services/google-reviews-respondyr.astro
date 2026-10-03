@@ -1,0 +1,14 @@
+---
+import DetailPage from '../../components/DetailPage.astro';
+import { RESPONDYR_PAGE, SERVICES } from '../../data/site';
+
+const crumbs = [
+  { name: 'Services', path: '/services/' },
+  { name: 'Google reviews with Respondyr', path: '/services/google-reviews-respondyr/' },
+];
+const siblings = [
+  ...SERVICES.map((s) => ({ href: `/services/${s.slug}/`, label: s.title })),
+  { href: '/services/monthly-seo-and-ads/', label: 'Monthly SEO and ad management' },
+];
+---
+<DetailPage page={RESPONDYR_PAGE} crumbs={crumbs} siblings={siblings} siblingsHeading="Website services" cta={{ href: 'https://respondyr.com/', label: 'See Respondyr' }} />

@@ -1,0 +1,21 @@
+---
+import DetailPage from '../../../components/DetailPage.astro';
+import { MONTHLY, MONTHLY_PAGES } from '../../../data/site';
+
+export function getStaticPaths() {
+  return Object.keys(MONTHLY_PAGES).map((slug) => ({ params: { slug } }));
+}
+const { slug } = Astro.params as { slug: string };
+const page = MONTHLY_PAGES[slug];
+const item = MONTHLY.find((m) => m.slug === slug)!;
+const crumbs = [
+  { name: 'Services', path: '/services/' },
+  { name: 'Monthly SEO and ads', path: '/services/monthly-seo-and-ads/' },
+  { name: item.h2, path: `/services/monthly-seo-and-ads/${slug}/` },
+];
+const siblings = [
+  ...Object.keys(MONTHLY_PAGES).filter((s) => s !== slug).map((s) => ({ href: `/services/monthly-seo-and-ads/${s}/`, label: MONTHLY_PAGES[s].h1 })),
+  { href: '/services/monthly-seo-and-ads/', label: 'All monthly SEO and ad services' },
+];
+---
+<DetailPage page={page} crumbs={crumbs} siblings={siblings} siblingsHeading="More monthly services" cta={{ href: '/contact/', label: 'Ask about monthly SEO and ads' }} />

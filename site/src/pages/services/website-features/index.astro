@@ -1,9 +1,9 @@
 ---
-import Base from '../../layouts/Base.astro';
-import Crumbs from '../../components/Crumbs.astro';
-import ServiceList from '../../components/ServiceList.astro';
-import CtaBand from '../../components/CtaBand.astro';
-import { ELEMENTS, WORK, SITE } from '../../data/site';
+import Base from '../../../layouts/Base.astro';
+import Crumbs from '../../../components/Crumbs.astro';
+import ServiceList from '../../../components/ServiceList.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import { ELEMENTS, WORK, SITE, FEATURE_PAGES } from '../../../data/site';
 
 const crumbs = [{ name: 'Services', path: '/services/' }, { name: 'Website features', path: '/services/website-features/' }];
 const name = (slug: string) => WORK.find((w) => w.slug === slug)?.name ?? slug;
@@ -52,7 +52,7 @@ const schema = [
       <ul class="svc-list feature-list" role="list">
         {ELEMENTS.filter((e) => e.runsOn === g.id).map((e) => (
           <li class="svc" id={e.slug}>
-            <h3>{e.name}</h3>
+            <h3>{FEATURE_PAGES[e.slug] ? <a href={`/services/website-features/${e.slug}/`}>{e.name}</a> : e.name}</h3>
             <p>{e.what}</p>
             {e.proof.length > 0 && (
               <p class="seen-on">See it on {e.proof.map((p, i) => (
