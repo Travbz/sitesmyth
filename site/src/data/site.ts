@@ -220,8 +220,8 @@ export const ELEMENTS: SiteElement[] = [
 // Monthly SEO and ad management: its own service and its own monthly contract, separate from
 // any website build. Feeds /services/monthly-seo-and-ads/.
 export const MONTHLY = [
-  { slug: 'google-indexing', h2: 'Getting your site indexed on Google',
-    p: 'A new website does not show up in search until Google knows it exists. We verify your site in Google Search Console, submit your sitemap, link the site to your Google Business Profile, and check that every page gets indexed.' },
+  { slug: 'search-indexing', h2: 'Getting your site indexed on Google and Bing',
+    p: 'A new website does not show up in search until the search engines know it exists. We verify your site in Google Search Console and Bing Webmaster Tools, submit your sitemap to both, link the site to your Google Business Profile, and check that every page gets indexed.' },
   { slug: 'local-seo', h2: 'Ongoing local SEO',
     p: 'Each month we look at which searches bring people to your site, fix what keeps pages from showing up, and add pages for the searches you are missing.' },
   { slug: 'google-ads', h2: 'Google Ads management',
