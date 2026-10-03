@@ -321,11 +321,11 @@ export const RESPONDYR_PAGE: DetailPage = {
 export const AI_SEARCH_PAGE: DetailPage = {
   title: 'AI Search Optimization (AEO and GEO) for Small Businesses',
   h1: 'AI search optimization (AEO and GEO) for small businesses',
-  description: 'Help AI search tools like ChatGPT, Google AI Overviews, and Copilot understand and cite your business. Its own service, separate from traditional SEO.',
+  description: 'Build your business\'s authority with ChatGPT, Google AI Overviews, and Copilot, so when someone asks which business to use, yours gets cited.',
   sections: [
-    { h2: 'Search is not just a list of links anymore', p: 'More people ask an AI tool for a recommendation instead of scrolling results. Those tools answer from what they can read and trust about your business.' },
-    { h2: 'What the work covers', p: 'Structured data that spells out your services and service area, pages written so each section answers one question on its own, a plain-text summary of the business for AI crawlers, and business details that match everywhere they appear online.' },
-    { h2: 'How it differs from SEO', p: 'Traditional SEO aims for a ranking position. AI search work aims to make yours the business an AI tool names when someone asks. The two overlap, and we treat them as separate jobs.' },
+    { h2: 'Search is not just a list of links anymore', p: 'More people ask an AI tool which business to use instead of scrolling through results. The tool answers with the businesses it trusts, and it decides who to trust from far more than your website.' },
+    { h2: 'What the work covers', p: 'We work on every surface AI engines draw from when they recommend a business, building your authority with them so that when someone asks who to call, yours is the name that gets cited.' },
+    { h2: 'How it differs from SEO', p: 'Traditional SEO works on your website and aims for a ranking position. AI search optimization happens mostly outside your website, building the authority AI engines look for across the internet. The two help each other, and we treat them as separate jobs.' },
   ],
 };
 
