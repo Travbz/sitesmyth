@@ -65,5 +65,7 @@ node scripts/add-site.mjs https://newclient.com "New Client Name"
 
 That writes `src/data/work/newclient.json` and saves desktop and phone screenshots to `public/work/`.
 Fill in every `TODO` in the new file (the build refuses to ship one), then build and deploy production.
-Sites are listed by their `order` number; new ones go last. Retake screenshots any time with
+Sites are listed by their `order` number; new ones go last. Then add the new slug to the `proof` list of each
+`ELEMENTS` entry in `src/data/site.ts` that the site has; that drives its feature tags on the
+portfolio and the "See it on" links on /services/website-features/. Retake screenshots any time with
 `node scripts/shoot.mjs` (all sites) or `node scripts/shoot.mjs <slug>` (one site).

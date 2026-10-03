@@ -1,5 +1,5 @@
 ---
-import { WORK } from '../data/site';
+import { WORK, ELEMENTS } from '../data/site';
 import ShotToggle from './ShotToggle';
 import WorkStatus from './WorkStatus.astro';
 interface Props { only?: string[]; headingLevel?: 'h2' | 'h3' }
@@ -18,6 +18,13 @@ const H = headingLevel;
         <ul class="work-built" role="list">
           {w.built.map((b) => <li>{b}</li>)}
         </ul>
+        {ELEMENTS.some((e) => e.proof.includes(w.slug)) && (
+          <ul class="feature-tags" role="list" aria-label={`Features on ${w.domain}`}>
+            {ELEMENTS.filter((e) => e.proof.includes(w.slug)).map((e) => (
+              <li><a href={`/services/website-features/#${e.slug}`}>{e.name}</a></li>
+            ))}
+          </ul>
+        )}
         <a class="work-link" href={w.url} target="_blank" rel="noopener">Visit {w.domain}</a>
       </div>
     </li>

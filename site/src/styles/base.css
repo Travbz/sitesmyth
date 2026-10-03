@@ -134,3 +134,13 @@ ul, ol { margin: 0; padding: 0; }
 .shot { display: grid; gap: .75rem; justify-items: start; }
 .shot .viewer-frame.phone { width: min(100%, 260px); }
 .work-item { scroll-margin-top: 5rem; }
+
+/* Website features page and portfolio feature tags */
+.feature-list .svc h3 { font-size: 1.3rem; margin-bottom: .5rem; }
+.seen-on { margin-top: .75rem; font-size: .95rem; color: var(--muted); }
+.feature-tags { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }
+.feature-tags a {
+  display: inline-block; padding: .35rem .7rem; font-size: .9rem; text-decoration: none;
+  border: 1px solid var(--line-strong, var(--line)); color: var(--fg);
+}
+.feature-tags a:hover { border-color: var(--accent); color: var(--accent); }

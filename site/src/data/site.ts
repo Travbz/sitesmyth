@@ -175,6 +175,48 @@ export const SERVICES: Service[] = [
   },
 ];
 
+// Website elements a client can opt into. One list feeds /services/website-features/,
+// the portfolio tags, and the sitesmyth-build skill. "proof" is the WORK slugs whose live
+// site has the element; every claim here was checked against that site's code.
+export type SiteElement = {
+  slug: string;
+  name: string;
+  what: string;
+  runsOn: 'free' | 'service';
+  proof: string[];
+};
+
+export const ELEMENTS: SiteElement[] = [
+  { slug: 'contact-forms', runsOn: 'free', proof: ['respondyr'], name: 'Contact and intake forms',
+    what: 'Forms that ask what your business needs to know, save every submission, and email it to you as it arrives. The quote form on this site works this way.' },
+  { slug: 'photo-galleries', runsOn: 'free', proof: ['loos-and-sons'], name: 'Photo galleries',
+    what: 'Your own job photos, sorted into categories visitors can filter.' },
+  { slug: 'menu-pages', runsOn: 'free', proof: ['tipsy-trout'], name: 'Menu pages',
+    what: 'Every dish and price as real text with menu markup search engines can read, plus a page for each signature item.' },
+  { slug: 'click-to-call', runsOn: 'free', proof: ['loos-and-sons', 'elevation-fire'], name: 'Click-to-call and emergency bars',
+    what: 'A call button that stays on screen on phones, and a banner for emergency service.' },
+  { slug: 'free-tools', runsOn: 'free', proof: ['respondyr'], name: 'Calculators and free tools',
+    what: 'Small tools your customers use right in the browser. They answer a question and bring in search traffic.' },
+  { slug: 'reviewed-blog', runsOn: 'free', proof: ['elevation-fire'], name: 'A blog you approve',
+    what: 'New articles are drafted on a schedule and wait for your review before they go live.' },
+  { slug: 'keyword-domains', runsOn: 'free', proof: ['elevation-fire'], name: 'Extra keyword domains',
+    what: 'Domains named after the searches you want, each sending visitors to a page built for that one search.' },
+  { slug: 'lead-tracking', runsOn: 'free', proof: ['respondyr'], name: 'Visitor and lead tracking',
+    what: 'Analytics that show where visitors come from and which pages turn them into leads.' },
+  { slug: 'interactive-design', runsOn: 'free', proof: [], name: 'Interactive design',
+    what: 'Pages that respond to the cursor and to scrolling, built light enough to stay fast. Move your cursor around this page.' },
+  { slug: 'search-markup', runsOn: 'free', proof: ['loos-and-sons', 'elevation-fire', 'tipsy-trout', 'respondyr'], name: 'Search and AI-ready markup',
+    what: 'Structured data on every page, so Google and AI search tools read your services and service area correctly.' },
+  { slug: 'online-booking', runsOn: 'service', proof: ['loos-and-sons'], name: 'Online booking',
+    what: 'Customers book a visit or sign up for a maintenance plan through the scheduling software you already use.' },
+  { slug: 'chat-and-text', runsOn: 'service', proof: ['loos-and-sons'], name: 'Chat and text widget',
+    what: 'A chat bubble that lets visitors text your business from any page.' },
+  { slug: 'job-applications', runsOn: 'service', proof: ['respondyr'], name: 'Job applications with file uploads',
+    what: 'Applicants send their answers and a resume, delivered to your inbox.' },
+  { slug: 'logins-and-backends', runsOn: 'service', proof: [], name: 'Logins, accounts, and simple backends',
+    what: 'Customer logins, member areas, and small databases for sites that need to do more than show pages.' },
+];
+
 export const STEPS = [
   { h: 'Tell us about the business', p: 'What you do, who you do it for, and where. Send photos of your work if you have them.' },
   { h: 'You set up your accounts', p: 'A GitHub account, a Cloudflare account, and your domain, all in your name. We walk you through it and you add us as a collaborator.' },

@@ -1,0 +1,72 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import ServiceList from '../../components/ServiceList.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { ELEMENTS, WORK, SITE } from '../../data/site';
+
+const crumbs = [{ name: 'Services', path: '/services/' }, { name: 'Website features', path: '/services/website-features/' }];
+const name = (slug: string) => WORK.find((w) => w.slug === slug)?.name ?? slug;
+const groups = [
+  {
+    id: 'free',
+    h2: 'Features that run on free hosting',
+    lede: 'These are built into the site itself and run on the same free hosting as the rest of your pages.',
+  },
+  {
+    id: 'service',
+    h2: 'Features that connect to another service',
+    lede: 'These work through a service you sign up for. Most charge a monthly fee, paid to them directly, and some have a free plan for small businesses.',
+  },
+];
+const schema = [
+  {
+    '@type': 'Service',
+    name: 'Small business website features',
+    provider: { '@id': `${SITE.url}/#org` },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Website features',
+      itemListElement: ELEMENTS.map((e) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: e.name, description: e.what } })),
+    },
+  },
+];
+---
+<Base
+  title="Small Business Website Features: Forms, Booking, Galleries"
+  description="Add what your business needs to its website: intake forms, online booking, photo galleries, menu pages, chat, and more. Each one is live on a site we built."
+  crumbs={crumbs}
+  schema={schema}
+>
+  <header class="page-head wrap">
+    <Crumbs items={crumbs} />
+    <h1>Website features for small businesses: forms, booking, galleries, and more</h1>
+    <p class="lede">Every site starts with the pages your customers search for. Then you add only the pieces your business uses. Most of these are already running on sites in our portfolio.</p>
+  </header>
+  {groups.map((g) => (
+    <section class="section section-tight wrap" aria-labelledby={`${g.id}-h`}>
+      <div class="section-head">
+        <h2 id={`${g.id}-h`}>{g.h2}</h2>
+        <p class="lede">{g.lede}</p>
+      </div>
+      <ul class="svc-list feature-list" role="list">
+        {ELEMENTS.filter((e) => e.runsOn === g.id).map((e) => (
+          <li class="svc" id={e.slug}>
+            <h3>{e.name}</h3>
+            <p>{e.what}</p>
+            {e.proof.length > 0 && (
+              <p class="seen-on">See it on {e.proof.map((p, i) => (
+                <>{i > 0 && (i === e.proof.length - 1 ? ' and ' : ', ')}<a href={`/work/#${p}`}>{name(p)}</a></>
+              ))}</p>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+  <section class="section wrap" aria-labelledby="sizes-h">
+    <div class="section-head"><h2 id="sizes-h">Website services</h2></div>
+    <ServiceList compact />
+  </section>
+  <CtaBand heading="Tell us what your site needs to do" />
+</Base>
