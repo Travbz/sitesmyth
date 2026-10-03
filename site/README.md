@@ -13,8 +13,8 @@ PROD=1 VARIANT=v1 npx astro build && node scripts/deploy.mjs prod   # sitesmyth.
 ```
 
 Previews are `noindex`. Production is v1 (Living Blueprint), built with `PROD=1` into `dist/prod`
-and served by the `sitesmyth-site` Worker on `sitesmyth.com/*` and `www.sitesmyth.com/*` (www
-redirects to the apex). The old R2 `sitesmyth-worker` keeps the wildcard routes for demo subdomains.
+and served by the `sitesmyth-site` Worker on `sitesmyth.com/*` and `www.sitesmyth.com/*` (www serves the
+same site; every page's canonical tag points at the apex). The old R2 `sitesmyth-worker` keeps the wildcard routes for demo subdomains.
 
 `worker/index.js` serves the assets and handles `POST /api/contact`. Leads are stored in the
 `sitesmyth-leads` KV namespace. Email alerts turn on when the Worker has `RESEND_API_KEY` and

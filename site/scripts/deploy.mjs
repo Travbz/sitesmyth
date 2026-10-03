@@ -15,7 +15,7 @@ for (const v of process.argv.slice(2)) {
     compatibility_date: '2026-09-15',
     account_id: ACCOUNT,
     workers_dev: false,
-    assets: { directory: `dist/${v}`, binding: 'ASSETS', not_found_handling: '404-page', run_worker_first: prod ? true : ['/api/*'] }, // prod runs the Worker first for the www redirect
+    assets: { directory: `dist/${v}`, binding: 'ASSETS', not_found_handling: '404-page', run_worker_first: ['/api/*'] }, // code runs only for the form; pages are free static assets
     kv_namespaces: [{ binding: 'LEADS', id: KV }],
     routes: prod
       ? [
