@@ -18,7 +18,7 @@ body { font-size: 1.15rem; line-height: 1.7; }
 h1, h2, h3 { font-weight: 700; letter-spacing: -0.025em; }
 h2 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); }
 h3 { font-size: 1.3rem; letter-spacing: -0.015em; }
-.btn, .nav, .viewer-tabs, .device-toggle, .viewer-caption, .crumbs, .work-meta, .work-link, .footer-h, .header-cta, .more, .field label, .err, .status, .step-n, .faq summary, .ind-list { font-family: var(--font-display); }
+.btn, .nav, .viewer-tabs, .device-toggle, .viewer-caption, .crumbs, .work-meta, .work-link, .footer-h, .header-cta, .more, .field label, .err, .status, .step-n, .faq summary { font-family: var(--font-display); }
 
 .btn { border-radius: 8px; font-size: 1rem; }
 .btn-primary { background: var(--accent); color: #fff; }
@@ -100,10 +100,6 @@ h3 { font-size: 1.3rem; letter-spacing: -0.015em; }
 @media (max-width: 960px) { .steps { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
 
-.ind-list { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
-.ind-list a { display: block; padding: 1.1rem 1.25rem; border: 1px solid var(--line); border-radius: 12px; text-decoration: none; font-weight: 600; }
-.ind-list a:hover { border-color: var(--accent); color: var(--accent); }
-@media (max-width: 760px) { .ind-list { grid-template-columns: 1fr; } }
 
 .work-list { list-style: none; display: grid; gap: 4rem; }
 .work-item { display: grid; grid-template-columns: 1.3fr 1fr; gap: 2.5rem; align-items: start; }
@@ -121,10 +117,6 @@ h3 { font-size: 1.3rem; letter-spacing: -0.015em; }
 .for-who { color: var(--muted); }
 @media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
 .head-cta { margin-top: 1.75rem; }
-.needs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-.need { padding: 1.5rem; border: 1px solid var(--line); border-radius: 12px; }
-.need p { margin-top: .4rem; color: var(--muted); }
-@media (max-width: 760px) { .needs { grid-template-columns: 1fr; } }
 
 .cta-band { background: var(--fg); color: #fff; padding-block: clamp(3.5rem, 8vw, 6rem); }
 .cta-inner { display: grid; gap: 1rem; justify-items: start; }

@@ -8,7 +8,7 @@ type Fire = { host: HTMLElement; canvas: HTMLCanvasElement; ctx: CanvasRendering
 // land with a spark burst. Tiles carry an ember glow that follows the pointer.
 // Reduced motion skips the canvases; off-screen fires pause.
 const FIRE_HOSTS = '.hero, .page-head, .cta-band';
-const GLOW = '.svc, .work-item, .owned-row, .step, .need, .faq details, .ind-list li, .viewer-frame';
+const GLOW = '.svc, .work-item, .owned-row, .step, .faq details, .viewer-frame';
 
 export default function Forge() {
   onMount(() => {

@@ -1,0 +1,16 @@
+{
+  "order": 30,
+  "name": "The Tipsy Trout Taproom",
+  "url": "https://tipsytrouttaproom.com/",
+  "domain": "tipsytrouttaproom.com",
+  "kind": "Taproom and food truck",
+  "place": "Delta, Colorado",
+  "pages": "8 pages",
+  "summary": "A beach bar a long way from any beach. The site leans into that with a 1970s surf look, and the food truck menu got real pages with real prices.",
+  "built": [
+    "A custom retro surf design",
+    "A full menu page for the El Pollo truck",
+    "Its own page for each signature dish",
+    "Menu item schema so search engines read the prices"
+  ]
+}

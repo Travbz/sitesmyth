@@ -1,0 +1,15 @@
+{
+  "order": 50,
+  "name": "Respondyr",
+  "url": "https://respondyr.com/",
+  "domain": "respondyr.com",
+  "kind": "Software company",
+  "place": "Review management software",
+  "pages": "Over 100 pages",
+  "summary": "The marketing site for a review management product. Feature pages, free tools, and a blog that publishes every week.",
+  "built": [
+    "Feature and pricing pages",
+    "Free tools that bring in search traffic",
+    "A blog with seventy-plus posts"
+  ]
+}

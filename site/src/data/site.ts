@@ -20,91 +20,18 @@ export type Work = {
   built: string[];
 };
 
-export const WORK: Work[] = [
-  {
-    slug: 'loos-and-sons',
-    name: 'Loos & Sons HVAC',
-    url: 'https://loosandsonshvac.com/',
-    domain: 'loosandsonshvac.com',
-    kind: 'HVAC contractor',
-    place: 'Longmont, Colorado',
-    pages: 'About 40 pages',
-    summary:
-      'Their old site went down for good. The rebuild gave every system they work on its own page and gave each town they drive to a page written for that town.',
-    built: [
-      'A page for each service, from furnace repair to geothermal',
-      'Twenty town pages, each written about that town',
-      'An Xcel Energy heat pump rebate page',
-      'A filterable gallery of real job photos',
-    ],
-  },
-  {
-    slug: 'elevation-fire',
-    name: 'Elevation Fire Protection',
-    url: 'https://elevationfireprotection.com/',
-    domain: 'elevationfireprotection.com',
-    kind: 'Fire sprinkler contractor',
-    place: 'Denver, Colorado',
-    pages: 'About 40 pages',
-    summary:
-      'A commercial fire sprinkler contractor working across Colorado and Wyoming. The site is built around the searches building owners and general contractors actually run.',
-    built: [
-      'Service pages for installation, inspection, testing, and repair',
-      'Location pages for the areas they cover',
-      'Pages aimed at specific Denver searches, like fire pump testing',
-      'A blog with over twenty articles',
-    ],
-  },
-  {
-    slug: 'tipsy-trout',
-    name: 'The Tipsy Trout Taproom',
-    url: 'https://tipsytrouttaproom.com/',
-    domain: 'tipsytrouttaproom.com',
-    kind: 'Taproom and food truck',
-    place: 'Delta, Colorado',
-    pages: '8 pages',
-    summary:
-      'A beach bar a long way from any beach. The site leans into that with a 1970s surf look, and the food truck menu got real pages with real prices.',
-    built: [
-      'A custom retro surf design',
-      'A full menu page for the El Pollo truck',
-      'Its own page for each signature dish',
-      'Menu item schema so search engines read the prices',
-    ],
-  },
-  {
-    slug: 'v-sandoval',
-    name: 'V Sandoval Cleaning',
-    url: 'https://vsandovalcleaning.com/',
-    domain: 'vsandovalcleaning.com',
-    kind: 'House cleaning',
-    place: 'Montrose, Colorado',
-    pages: 'One page',
-    summary:
-      'A single landing page that says what they clean, where they go, and how to book. Sometimes one good page is the whole job.',
-    built: [
-      'One focused landing page',
-      'Services and service towns in plain view',
-      'A booking call to action on every screen',
-    ],
-  },
-  {
-    slug: 'respondyr',
-    name: 'Respondyr',
-    url: 'https://respondyr.com/',
-    domain: 'respondyr.com',
-    kind: 'Software company',
-    place: 'Review management software',
-    pages: 'Over 100 pages',
-    summary:
-      'The marketing site for a review management product. Feature pages, free tools, and a blog that publishes every week.',
-    built: [
-      'Feature and pricing pages',
-      'Free tools that bring in search traffic',
-      'A blog with seventy-plus posts',
-    ],
-  },
-];
+// One file per site in src/data/work/<slug>.json. Add a site with
+// `node scripts/add-site.mjs <url>`; the file name is the slug.
+const workFiles = import.meta.glob<Omit<Work, 'slug'> & { order: number }>('./work/*.json', { eager: true, import: 'default' });
+
+export const WORK: Work[] = Object.entries(workFiles)
+  .map(([path, w]) => ({ slug: path.slice(path.lastIndexOf('/') + 1, -5), ...w }))
+  .sort((a, b) => a.order - b.order)
+  .map(({ order, ...w }) => {
+    // A scaffolded entry that was never filled in must not reach the live site.
+    if (JSON.stringify(w).includes('TODO')) throw new Error(`src/data/work/${w.slug}.json still has TODO text`);
+    return w;
+  });
 
 export type Service = {
   slug: string;
@@ -245,87 +172,6 @@ export const SERVICES: Service[] = [
         a: 'Old addresses get redirected to the matching new pages, which is how rankings carry over. A faster site with better pages usually helps from there.',
       },
     ],
-  },
-];
-
-export type Industry = {
-  slug: string;
-  short: string;
-  title: string;
-  h1: string;
-  description: string;
-  intro: string;
-  needs: { h: string; p: string }[];
-  examples: string[];
-};
-
-export const INDUSTRIES: Industry[] = [
-  {
-    slug: 'hvac-companies',
-    short: 'HVAC companies',
-    title: 'HVAC Website Design',
-    h1: 'Website design for HVAC companies',
-    description:
-      'HVAC websites with a page for every system you service and every town you drive to. Built to bring in calls, and owned by you.',
-    intro:
-      'People search for HVAC help when something stops working. They search by the problem and by their town, and the company with a page for both gets the call.',
-    needs: [
-      { h: 'A page per system', p: 'Furnaces, AC, heat pumps, boilers, water heaters. Each one is its own search, so each one gets its own page.' },
-      { h: 'Town pages that say something', p: 'Older homes in one town, new builds in the next, mountain propane in a third. The page should know the difference.' },
-      { h: 'Rebates and emergencies', p: 'Utility rebate pages and emergency service pages catch people who are ready to book today.' },
-      { h: 'Your real job photos', p: 'A gallery of your own work does more for trust than any stock photo.' },
-    ],
-    examples: ['loos-and-sons'],
-  },
-  {
-    slug: 'fire-protection-contractors',
-    short: 'Fire protection',
-    title: 'Fire Sprinkler Contractor Website Design',
-    h1: 'Website design for fire sprinkler and fire protection contractors',
-    description:
-      'Websites for fire sprinkler contractors that rank for inspections, testing, and installation searches, built for property managers and general contractors.',
-    intro:
-      'Your customers are property managers, facility teams, and general contractors. They search for a specific job, like an annual inspection or a fire pump test, in a specific city.',
-    needs: [
-      { h: 'Pages for each inspection and test', p: 'Annual inspections, pump testing, backflow, and repairs are separate searches with separate buyers.' },
-      { h: 'Coverage you can prove', p: 'Location pages for the regions you work, written for the buildings and codes there.' },
-      { h: 'A path for general contractors', p: 'Builders looking for a sprinkler sub need to see your project experience fast.' },
-      { h: 'Articles that answer code questions', p: 'A blog that answers what facility managers ask keeps bringing them back.' },
-    ],
-    examples: ['elevation-fire'],
-  },
-  {
-    slug: 'restaurants-and-bars',
-    short: 'Restaurants and bars',
-    title: 'Restaurant and Bar Website Design',
-    h1: 'Websites for restaurants, bars, and food trucks',
-    description:
-      'Restaurant and bar websites with real menu pages, prices, and hours, designed to feel like your place. Built fast for people deciding where to eat right now.',
-    intro:
-      'Someone deciding where to eat has a phone in one hand and about thirty seconds. They want the menu, the prices, and where you are.',
-    needs: [
-      { h: 'A menu people can read', p: 'Real text, not a PDF or a photo of a printed menu, so it works on a phone and shows up in search.' },
-      { h: 'Pages for signature dishes', p: 'People search for the dish they are craving. A page for your best items catches those searches.' },
-      { h: 'A look that matches the room', p: 'Your site should feel like walking in the door, not like every other restaurant template.' },
-      { h: "What's on this week", p: 'Events, live music, and specials, in a place that is easy to keep up to date.' },
-    ],
-    examples: ['tipsy-trout'],
-  },
-  {
-    slug: 'cleaning-companies',
-    short: 'Cleaning businesses',
-    title: 'Website Design for Cleaning Businesses',
-    h1: 'Website design for house cleaning businesses',
-    description:
-      'A clean, simple website for house cleaning and janitorial businesses that shows your services, the towns you cover, and how to book.',
-    intro:
-      'Inviting someone into your home takes trust. A clear, professional site that says exactly what you do earns that trust before the first call.',
-    needs: [
-      { h: 'Services spelled out', p: 'Deep cleans, routine visits, move-in and move-out, and short-term rentals each mean something different to the customer.' },
-      { h: 'The towns you cover', p: 'Customers want to know you come to them before they reach out.' },
-      { h: 'Booking up front', p: 'A clear way to book on every screen, because that is the whole point of the visit.' },
-    ],
-    examples: ['v-sandoval'],
   },
 ];
 

@@ -4,7 +4,7 @@ import { createSignal, onCleanup, onMount, Show } from 'solid-js';
 // A CAD crosshair follows the pointer everywhere. Over a measurable part of
 // the page it reads out that part's size and the part gets registration ticks.
 // Fine pointers only; reduced motion keeps the measuring but drops easing.
-const MEASURE = '.svc, .work-item .viewer-frame, .owned, .step, .need, .ind-list a, .board, .faq details, .field input, .field textarea, .field select, .btn';
+const MEASURE = '.svc, .work-item .viewer-frame, .owned, .step, .board, .faq details, .field input, .field textarea, .field select, .btn';
 
 export default function Drafting() {
   const [on, setOn] = createSignal(false);

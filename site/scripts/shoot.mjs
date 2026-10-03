@@ -1,20 +1,38 @@
+// Screenshots portfolio sites into public/work/<slug>-desktop.webp and <slug>-phone.webp.
+// Usage: node scripts/shoot.mjs            (every site in src/data/work/)
+//        node scripts/shoot.mjs tipsy-trout (just the named slugs)
 import { chromium } from 'playwright';
-const sites = {
-  'loos-and-sons': 'https://loosandsonshvac.com/',
-  'elevation-fire': 'https://elevationfireprotection.com/',
-  'tipsy-trout': 'https://tipsytrouttaproom.com/',
-  'v-sandoval': 'https://vsandovalcleaning.com/',
-  'respondyr': 'https://respondyr.com/',
+import sharp from 'sharp';
+import { readdirSync, readFileSync } from 'node:fs';
+
+const DIR = 'src/data/work';
+const want = process.argv.slice(2);
+const sites = readdirSync(DIR)
+  .filter((f) => f.endsWith('.json'))
+  .map((f) => ({ slug: f.slice(0, -5), url: JSON.parse(readFileSync(`${DIR}/${f}`, 'utf8')).url }))
+  .filter((s) => !want.length || want.includes(s.slug));
+
+if (want.length && sites.length !== want.length) {
+  const found = sites.map((s) => s.slug);
+  console.error(`No file in ${DIR} for: ${want.filter((w) => !found.includes(w)).join(', ')}`);
+  process.exit(1);
+}
+
+const views = {
+  desktop: { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, out: 1200 },
+  phone: { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, out: 600 },
 };
-const b = await chromium.launch();
-for (const [slug, url] of Object.entries(sites)) {
-  for (const [kind, vp] of [['desktop', { width: 1440, height: 900 }], ['phone', { width: 390, height: 844 }]]) {
-    const p = await b.newPage({ viewport: vp, deviceScaleFactor: kind === 'phone' ? 2 : 1, reducedMotion: 'reduce' });
-    await p.goto(url, { waitUntil: 'networkidle', timeout: 45000 }).catch(() => {});
-    await p.waitForTimeout(2500);
-    await p.screenshot({ path: `public/work/${slug}-${kind}.png` });
-    await p.close();
+
+const browser = await chromium.launch();
+for (const { slug, url } of sites) {
+  for (const [kind, v] of Object.entries(views)) {
+    const page = await browser.newPage({ viewport: v.viewport, deviceScaleFactor: v.deviceScaleFactor, reducedMotion: 'reduce' });
+    await page.goto(url, { waitUntil: 'networkidle', timeout: 45000 }).catch(() => {});
+    await page.waitForTimeout(2500);
+    const png = await page.screenshot();
+    await sharp(png).resize({ width: v.out }).webp({ quality: 82 }).toFile(`public/work/${slug}-${kind}.webp`);
+    await page.close();
   }
   console.log('shot', slug);
 }
-await b.close();
+await browser.close();

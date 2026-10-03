@@ -20,4 +20,13 @@ redirects to the apex). The old R2 `sitesmyth-worker` keeps the wildcard routes 
 `sitesmyth-leads` KV namespace. Email alerts turn on when the Worker has `RESEND_API_KEY` and
 `NOTIFY_TO` secrets.
 
-Portfolio screenshots: `node scripts/shoot.mjs`, then convert to webp in `public/work/`.
+## Add a site to the portfolio
+
+```
+node scripts/add-site.mjs https://newclient.com "New Client Name"
+```
+
+That writes `src/data/work/newclient.json` and saves desktop and phone screenshots to `public/work/`.
+Fill in every `TODO` in the new file (the build refuses to ship one), then build and deploy production.
+Sites are listed by their `order` number; new ones go last. Retake screenshots any time with
+`node scripts/shoot.mjs` (all sites) or `node scripts/shoot.mjs <slug>` (one site).
