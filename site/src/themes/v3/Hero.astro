@@ -1,5 +1,6 @@
 ---
 import HeroText from '../../components/HeroText.astro';
+import HeroMarketing from '../../components/HeroMarketing.astro';
 // Storefronts are the real client sites. The last lot is open.
 const shops = [
   { x: 40, w: 250, h: 250, wall: '#9c3a25', trim: '#f2e6d0', awn: ['#f2e6d0', '#134437'], sign: 'Loos & Sons HVAC' },
@@ -10,7 +11,7 @@ const shops = [
 const ground = 380;
 ---
 <section class="hero">
-  <div class="wrap hero-copy"><HeroText /></div>
+  <div class="wrap hero-copy"><HeroText /><HeroMarketing /></div>
   <div class="street" role="img" aria-label="A main street of storefronts for businesses we built sites for, with one empty lot for yours">
     <svg viewBox="0 0 1280 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
       <rect x="0" y={ground} width="1280" height="40" fill="#c9c2b4" />

@@ -428,12 +428,21 @@ export const HOME = {
   body: [
     'Some businesses need one clean page that says what they do and how to reach them. Others need a page for each service, each town they drive to, or each item on the menu, so customers searching for any of those find them. We build both, fast and ready for search.',
     'Before any work starts, you open your own accounts and add us to them. We build the site inside those accounts. When the job is paid, there is nothing to transfer, because it was yours the whole time.',
-    'Once the site is live, we can keep the marketing going too: monthly SEO, ad management, and AI search optimization, each on its own monthly contract.',
   ],
   explore: [
     { href: '/work/', label: 'See the sites we have built' },
     { href: '/services/', label: 'What we build' },
-    { href: '/services/#ongoing-marketing', label: 'Ongoing marketing' },
     { href: '/own-your-website/', label: 'How the handoff works' },
   ],
+  // Its own subsection of the hero, full width under the main hero.
+  marketing: {
+    h2: 'Ongoing marketing after launch',
+    p: 'Once your site is live, we can keep customers coming. Each service runs on its own monthly contract, and you can sign up without a website from us.',
+    items: [
+      { href: '/services/monthly-seo/', label: 'Monthly SEO', text: 'Get indexed on Google and Bing, then stay ranked month after month.' },
+      { href: '/services/ad-management/', label: 'Ad management', text: 'We run your Google, Facebook, and Instagram ads every month. You bring the ads.' },
+      { href: '/services/ai-search-optimization/', label: 'AI search optimization', text: 'Build your authority with AI tools, so ChatGPT and Google AI cite your business.' },
+      { href: '/services/google-reviews-respondyr/', label: 'Google reviews with Respondyr', text: 'Our sister company answers every Google review in your voice and helps you climb the map.' },
+    ],
+  },
 };

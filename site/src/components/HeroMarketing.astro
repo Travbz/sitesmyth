@@ -1,0 +1,18 @@
+---
+// Ongoing marketing as its own subsection of the home hero. Tiles reuse the services
+// tile styles, so every theme's interaction layer and whole-tile clicks apply.
+import { HOME } from '../data/site';
+const m = HOME.marketing;
+---
+<section class="hero-marketing" aria-labelledby="mkt-h">
+  <h2 id="mkt-h">{m.h2}</h2>
+  <p class="lede">{m.p}</p>
+  <ul class="svc-list" role="list">
+    {m.items.map((x) => (
+      <li class="svc">
+        <h3><a href={x.href}>{x.label}</a></h3>
+        <p>{x.text}</p>
+      </li>
+    ))}
+  </ul>
+</section>
