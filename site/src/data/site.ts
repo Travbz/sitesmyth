@@ -5,7 +5,7 @@ export const SITE = {
   url: 'https://sitesmyth.com',
   tagline: 'Small business websites you own outright',
   description:
-    'SiteSmyth builds fast, search-ready websites for small businesses, from one-page landing pages to full sites with service, city, and menu pages. Your GitHub, your Cloudflare, your domain.',
+    'SiteSmyth builds fast, search-ready websites for small businesses, from one-page landing pages to full sites with service, city, and menu pages, and hands them over: your GitHub, your Cloudflare, your domain. Ongoing SEO, ad management, and AI search optimization are available on monthly contracts.',
 };
 
 export type Work = {
@@ -394,6 +394,17 @@ export const MONTHLY_GROUPS: Record<string, {
     cta: 'Ask about ad management',
   },
 };
+
+// Buyer questions answered on /services/. Answers state only rulings and facts already on the site.
+export const SERVICES_FAQ = [
+  { q: 'How much does a small business website cost?', a: 'It depends on how many pages your business needs and which features you add. Tell us about your business through the quote form and we will reply with a quote for the build. Ongoing marketing is quoted separately, as its own monthly contract.' },
+  { q: 'Do I own my website?', a: 'Yes. Your domain, your code, and your hosting are in your name from day one. You open the accounts, add us to them, and we build the site inside them, so there is nothing to transfer when the job is done.' },
+  { q: 'What does hosting cost after the site launches?', a: 'Your site runs on your own Cloudflare account, and most small sites fit in the free plan. You keep paying for your domain name, and any feature that runs on another service, like booking or chat software, is billed by that service.' },
+  { q: 'Can you redesign my Wix, GoDaddy, or WordPress site?', a: 'Yes. We rebuild it as a fast site you own, on hosting in your name, and move your content over so your search rankings come with you.' },
+  { q: 'Do I need a website from you to get monthly SEO or ad management?', a: 'No. Monthly SEO, ad management, and AI search optimization are each their own monthly contract, separate from any website build.' },
+  { q: 'Do you create the ads?', a: 'No. You bring the ads, and we manage them: targeting, budgets, and adjustments every month. Ad spend is paid to Google or Meta directly.' },
+  { q: 'What is the difference between SEO and AI search optimization?', a: 'SEO works on your website so it ranks in search results. AI search optimization builds your authority across the internet so that when someone asks ChatGPT, Google AI Overviews, or Copilot which business to use, yours gets cited.' },
+];
 
 export const STEPS = [
   { h: 'Tell us about the business', p: 'What you do, who you do it for, and where. Send photos of your work if you have them.' },

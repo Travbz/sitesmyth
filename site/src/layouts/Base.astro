@@ -4,7 +4,7 @@ import '@theme/fonts.ts';
 import '@theme/theme.css';
 import Header from '@theme/Header.astro';
 import Footer from '@theme/Footer.astro';
-import { SITE, WORK } from '../data/site';
+import { SITE, WORK, SERVICES, MONTHLY_GROUPS } from '../data/site';
 
 interface Props {
   title: string;
@@ -23,13 +23,29 @@ const indexable = process.env.PROD === '1';
 const ogImage = new URL(`/work/${WORK[0].slug}-desktop.webp`, SITE.url).href;
 
 const graph = [
+  // One business entity on every page. No address or service area by Travis's ruling;
+  // add sameAs links once the SiteSmyth Google Business Profile and socials exist.
   {
-    '@type': 'Organization',
+    '@type': ['Organization', 'ProfessionalService'],
     '@id': `${SITE.url}/#org`,
     name: SITE.name,
     url: SITE.url,
     description: SITE.description,
+    logo: `${SITE.url}/favicon.svg`,
+    contactPoint: { '@type': 'ContactPoint', contactType: 'sales', url: `${SITE.url}/contact/` },
+    knowsAbout: ['Small business website design', 'Local SEO', 'Google Ads management', 'Meta ads management', 'AI search optimization'],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'SiteSmyth services',
+      itemListElement: [
+        ...SERVICES.map((s) => ({ name: s.h1, url: `${SITE.url}/services/${s.slug}/` })),
+        { name: 'Website features', url: `${SITE.url}/services/website-features/` },
+        ...Object.entries(MONTHLY_GROUPS).map(([k, g]) => ({ name: g.h1, url: `${SITE.url}/services/${k}/` })),
+        { name: 'AI search optimization (AEO and GEO)', url: `${SITE.url}/services/ai-search-optimization/` },
+      ].map((o) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: o.name, url: o.url } })),
+    },
   },
+  { '@type': 'WebSite', '@id': `${SITE.url}/#site`, name: SITE.name, url: SITE.url, publisher: { '@id': `${SITE.url}/#org` } },
   ...(crumbs.length
     ? [
         {

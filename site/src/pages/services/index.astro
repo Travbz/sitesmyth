@@ -3,8 +3,11 @@ import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import ServiceList from '../../components/ServiceList.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import { SERVICES_FAQ } from '../../data/site';
 
 const crumbs = [{ name: 'Services', path: '/services/' }];
+const schema = [{ '@type': 'FAQPage', mainEntity: SERVICES_FAQ.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }];
 // Two kinds of work: one-time website builds, and ongoing marketing on monthly contracts.
 const ongoing = [
   {
@@ -33,6 +36,7 @@ const ongoing = [
   title="Website Design Services for Small Businesses"
   description="One-time website builds: landing pages, full websites, local SEO pages, and redesigns, handed over to you. Plus ongoing SEO, ad management, and AI search on monthly contracts."
   crumbs={crumbs}
+  schema={schema}
 >
   <header class="page-head wrap">
     <Crumbs items={crumbs} />
@@ -58,6 +62,10 @@ const ongoing = [
       <p class="lede">Monthly services, each on its own contract and separate from any website build. You can sign up for them without a site from us.</p>
     </div>
     <ServiceList level="h3" only={ongoing} />
+  </section>
+  <section class="section wrap" aria-labelledby="faq-h">
+    <div class="section-head"><h2 id="faq-h">Questions about small business websites</h2></div>
+    <Faq faqs={SERVICES_FAQ} />
   </section>
   <CtaBand />
 </Base>

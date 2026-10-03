@@ -1,18 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 import Hero from '@theme/Hero.astro';
-import { HOME, SITE } from '../data/site';
+import { HOME } from '../data/site';
 
-const schema = [
-  {
-    '@type': 'ProfessionalService',
-    name: SITE.name,
-    url: SITE.url,
-    description: HOME.description,
-    serviceType: ['Website design', 'Landing page design', 'Local SEO pages', 'Website redesign'],
-  },
-];
+// The business entity lives in Base.astro on every page; the home page adds nothing extra.
 ---
-<Base title={HOME.title} description={HOME.description} schema={schema}>
+<Base title={HOME.title} description={HOME.description}>
   <Hero />
 </Base>
