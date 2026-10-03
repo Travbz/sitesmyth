@@ -220,9 +220,9 @@ export const MONTHLY = [
   { slug: 'local-seo', h2: 'Ongoing local SEO',
     p: 'Each month we look at which searches bring people to your site, fix what keeps pages from showing up, and add pages for the searches you are missing.' },
   { slug: 'google-ads', h2: 'Google Ads management',
-    p: 'Search ads for the services and towns you want more work in, set up and adjusted every month, with tracking that shows which ads turn into leads.' },
+    p: 'We manage your Google search ads for the services and towns you want more work in: targeting, budgets, and tracking, adjusted every month. We do not create the ads themselves.' },
   { slug: 'meta-ads', h2: 'Facebook and Instagram ads',
-    p: 'Meta ads shown to people in your service area, run and adjusted every month.' },
+    p: 'We manage your Facebook and Instagram ads for your service area, adjusted every month. We do not create the ads themselves.' },
 ];
 
 // One page per searchable feature and per monthly service. Copy states only what the
@@ -352,10 +352,10 @@ export const MONTHLY_PAGES: Record<string, DetailPage> = {
   'google-ads': {
     title: 'Google Ads Management for Small Businesses',
     h1: 'Google Ads management for small businesses',
-    description: 'Google search ads for the services and towns you want more work in, set up and adjusted every month, with tracking that shows which ads become leads.',
+    description: 'We manage your Google search ads for the services and towns you want more work in, adjusted every month, with tracking that shows which ads become leads. We do not create the ads.',
     sections: [
       { h2: 'Ads where customers are searching', p: 'Search ads put your business at the top of the results for the services and towns you choose, at the moment someone searches for them.' },
-      { h2: 'Managed every month', p: 'We set up the campaigns, then adjust keywords, budgets, and ads every month based on what turns into leads.' },
+      { h2: 'We manage the ads, we do not create them', p: 'You bring the ads, and we run them. We do not write ad copy or make ad images. We manage the campaigns: keywords, targeting, budgets, and bids, adjusted every month based on what turns into leads.' },
       { h2: 'Tracking that shows what works', p: 'Conversion tracking shows which ads lead to form submissions, so your budget moves toward what works.' },
       { h2: 'Ad spend', p: 'What you spend on clicks is paid to Google directly, separate from the management fee.' },
     ],
@@ -363,10 +363,10 @@ export const MONTHLY_PAGES: Record<string, DetailPage> = {
   'meta-ads': {
     title: 'Facebook and Instagram Ads for Local Businesses',
     h1: 'Facebook and Instagram ads for local businesses',
-    description: 'Meta ads shown to people in your service area, set up and adjusted every month.',
+    description: 'We manage your Facebook and Instagram ads for your service area, adjusted every month. We do not create the ads.',
     sections: [
       { h2: 'Reach people before they search', p: 'Search ads catch people who are already looking. Facebook and Instagram ads reach people in your area before they need you, so yours is the name they remember when they do.' },
-      { h2: 'Managed every month', p: 'We set up campaigns aimed at your service area and adjust them every month based on results.' },
+      { h2: 'We manage the ads, we do not create them', p: 'You bring the ads, and we run them. We do not write ad copy or make ad images or video. We manage the campaigns: who sees them in your service area, budgets, and adjustments every month based on results.' },
       { h2: 'Ad spend', p: 'Ad spend is paid to Meta directly, separate from the management fee.' },
     ],
   },
