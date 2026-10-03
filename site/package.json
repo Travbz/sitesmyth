@@ -1,0 +1,29 @@
+{
+  "name": "sitesmyth-site",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "build:all": "node scripts/build-all.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@astrojs/solid-js": "^7.0.2",
+    "@fontsource-variable/big-shoulders-display": "^5.3.0",
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource-variable/newsreader": "^5.3.0",
+    "@fontsource-variable/public-sans": "^5.3.0",
+    "@fontsource-variable/schibsted-grotesk": "^5.3.0",
+    "@fontsource-variable/space-grotesk": "^5.3.0",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
+    "@fontsource/libre-caslon-text": "^5.3.0",
+    "astro": "^7.3.5",
+    "solid-js": "^1.9.15"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0",
+    "sharp": "^0.35.5",
+    "wrangler": "^4.147.0"
+  }
+}
