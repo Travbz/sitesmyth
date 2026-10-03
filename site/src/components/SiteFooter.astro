@@ -11,12 +11,13 @@ const year = new Date().getFullYear();
     </div>
     <nav aria-label="Services">
       <p class="footer-h">Services</p>
-      <ul role="list">{SERVICES.map((s) => <li><a href={`/services/${s.slug}/`}>{s.nav}</a></li>)}<li><a href="/services/website-features/">Website features</a></li><li><a href="/services/monthly-marketing/">Monthly marketing</a></li></ul>
+      <ul role="list">{SERVICES.map((s) => <li><a href={`/services/${s.slug}/`}>{s.nav}</a></li>)}<li><a href="/services/website-features/">Website features</a></li></ul>
     </nav>
     <nav aria-label="Company">
       <p class="footer-h">More</p>
       <ul role="list">
         <li><a href="/work/">Portfolio</a></li>
+        <li><a href="/monthly-seo-and-ads/">Monthly SEO and ads</a></li>
         <li><a href="/own-your-website/">Own your website</a></li>
         <li><a href="/contact/">Contact</a></li>
       </ul>

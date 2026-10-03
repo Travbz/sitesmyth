@@ -217,7 +217,8 @@ export const ELEMENTS: SiteElement[] = [
     what: 'Customer logins, member areas, and small databases for sites that need to do more than show pages.' },
 ];
 
-// Monthly services, billed separately from the website build. Feeds /services/monthly-marketing/.
+// Monthly SEO and ad management: its own service and its own monthly contract, separate from
+// any website build. Feeds /monthly-seo-and-ads/.
 export const MONTHLY = [
   { slug: 'google-indexing', h2: 'Getting your site indexed on Google',
     p: 'A new website does not show up in search until Google knows it exists. We verify your site in Google Search Console, submit your sitemap, link the site to your Google Business Profile, and check that every page gets indexed.' },
