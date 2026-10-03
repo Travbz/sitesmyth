@@ -14,6 +14,9 @@ for (const [i, v] of ['v1', 'v2', 'v3', 'v4'].entries()) {
   for (const path of pages(`dist/${v}`)) {
     for (const width of [375, 1280]) {
       const pg = await b.newPage({ viewport: { width, height: 800 } });
+      // These are static servers, so the Worker's availability endpoint is not there. Answer it
+      // the way the live Worker does, with nothing hidden.
+      await pg.route('**/api/work-status', (r) => r.fulfill({ json: { updated: null, down: [] } }));
       const errs = [];
       pg.on('pageerror', (e) => errs.push(e.message));
       pg.on('console', (m) => m.type() === 'error' && errs.push(m.text()));

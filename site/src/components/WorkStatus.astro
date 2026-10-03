@@ -1,0 +1,24 @@
+---
+// Drops any portfolio entry whose site failed its last two hourly checks, and any
+// [data-work-group] section those removals leave empty.
+// The status comes from /api/work-status, which the Worker's cron writes to KV, so pages
+// stay static assets and nobody's site gets hit on a page view. Anything that goes wrong
+// here (no answer, bad JSON, running under `astro dev` with no Worker) leaves every entry
+// in place: a stale listing is better than an empty portfolio.
+---
+<script is:inline>
+  (async () => {
+    const entries = document.querySelectorAll('[data-work]');
+    if (!entries.length) return;
+    try {
+      const res = await fetch('/api/work-status', { headers: { accept: 'application/json' } });
+      if (!res.ok) return;
+      const { down } = await res.json();
+      if (!Array.isArray(down) || !down.length) return;
+      for (const el of entries) if (down.includes(el.dataset.work)) el.remove();
+      for (const group of document.querySelectorAll('[data-work-group]')) {
+        if (!group.querySelector('[data-work]')) group.remove();
+      }
+    } catch {}
+  })();
+</script>
